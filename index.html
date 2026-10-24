@@ -1,5 +1,6 @@
+from pathlib import Path
 
-<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +10,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:#111;font-family:Arial,sans-serif}
 a{color:inherit;text-decoration:none}
-.announcement{background:#111;color:white;text-align:center;padding:11px;font-size:11px;letter-spacing:1.5px}
+.announcement{background:#000;color:#fff;text-align:center;padding:11px 15px;font-size:11px;font-weight:700;letter-spacing:2px;width:100%}
 header{padding:22px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;gap:20px}
 .logo{font-size:30px;font-weight:900;letter-spacing:5px}
 nav{display:flex;gap:22px;font-size:12px;font-weight:bold;flex-wrap:wrap}
@@ -44,128 +45,10 @@ footer p{color:#bbb}
 </head>
 <body>
 
-<div class="announcement">
-
-<!-- Promotional Top Bar -->
-<div class="promo-bar">
-  BUY 1 GET 2
-</div>
-
-<style>
-  .promo-bar {
-    width: 100%;
-    background-color: #000000;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 15px;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    box-sizing: border-box;
-  }
-</style>
-</div>
+<div class="announcement">BUY 1 GET 2</div>
 
 <header>
   <a class="logo" href="#">VOLT.</a>
   <nav>
     <a href="#shop">SHOP ALL</a>
-    <a href="#shop" data-filter="T-SHIRTS">T-SHIRTS</a>
-    <a href="#shop" data-filter="SETS">SETS</a>
-    <a href="#shop" data-filter="ACCESSORIES">ACCESSORIES</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <p>NEW SEASON / NEW ENERGY</p>
-  <h1>OWN YOUR STYLE.</h1>
-  <p>EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
-  <a href="#shop">SHOP THE COLLECTION</a>
-</section>
-
-<section id="shop">
-  <div class="toolbar">
-    <h2>NEW COLLECTION</h2>
-    <input id="search" type="search" placeholder="Search products..." aria-label="Search products">
-  </div>
-  <div class="filters">
-    <button class="active" data-filter="ALL">ALL PRODUCTS</button>
-    <button data-filter="T-SHIRTS">T-SHIRTS</button>
-    <button data-filter="SETS">SETS</button>
-    <button data-filter="ACCESSORIES">ACCESSORIES</button>
-  </div>
-  <div class="grid" id="products"></div>
-</section>
-
-<footer>
-  <h2 class="logo">VOLT.</h2>
-  <p>YOUR STYLE. YOUR RULES.</p>
-  <p>Shipping · Returns · Contact</p>
-  <p>© 2026 VOLT. All rights reserved.</p>
-</footer>
-
-<script>
-const items = [
- {name:"OVERSIZED BLACK TEE",price:499,category:"T-SHIRTS",tag:"NEW",
-  img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=650&q=80"},
- {name:"ESSENTIAL WHITE TEE",price:399,category:"T-SHIRTS",tag:"BESTSELLER",
-  img:"https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=650&q=80"},
- {name:"STREETWEAR SET",price:1299,category:"SETS",tag:"NEW",
-  img:"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=650&q=80"},
- {name:"URBAN DAILY TEE",price:449,category:"T-SHIRTS",tag:"",
-  img:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=650&q=80"},
- {name:"MINIMAL BLACK CAP",price:299,category:"ACCESSORIES",tag:"",
-  img:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=650&q=80"},
- {name:"CLASSIC COTTON TEE",price:499,category:"T-SHIRTS",tag:"NEW",
-  img:"https://images.unsplash.com/photo-1527719327859-c6ce80353573?auto=format&fit=crop&w=650&q=80"},
- {name:"CASUAL TWO PIECE",price:1199,category:"SETS",tag:"",
-  img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=650&q=80"},
- {name:"EVERYDAY BAG",price:349,category:"ACCESSORIES",tag:"",
-  img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=650&q=80"}
-];
-
-let category = "ALL";
-const grid = document.getElementById("products");
-const search = document.getElementById("search");
-
-function render(){
- const term = search.value.toLowerCase().trim();
- const filtered = items.filter(p =>
-   (category === "ALL" || p.category === category) &&
-   p.name.toLowerCase().includes(term)
- );
-
- grid.innerHTML = filtered.map(p => `
-  <article class="product">
-    ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
-    <img src="${p.img}" alt="${p.name}" loading="lazy">
-    <h3>${p.name}</h3>
-    <div class="price">${p.price.toLocaleString("en-US")} EGP</div>
-  </article>
- `).join("");
-
- if(!filtered.length){
-   grid.innerHTML = "<p>No products found.</p>";
- }
-}
-
-document.querySelectorAll("[data-filter]").forEach(btn=>{
- btn.addEventListener("click",e=>{
-   e.preventDefault();
-   category = btn.dataset.filter;
-   document.querySelectorAll(".filters button").forEach(b=>
-     b.classList.toggle("active",b.dataset.filter===category)
-   );
-   render();
-   document.getElementById("shop").scrollIntoView({behavior:"smooth"});
- });
-});
-
-search.addEventListener("input",render);
-render();
-</script>
-
-</body>
-</html>
+    <a href="#shop
