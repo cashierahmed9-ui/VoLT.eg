@@ -592,6 +592,32 @@ search.addEventListener("input", render);
 
 render();
 </script>
+<script>
+const themeButton = document.getElementById("themeToggle");
 
+function updateTheme() {
+  const isDark = document.body.classList.contains("dark-mode");
+
+  themeButton.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+}
+
+if (localStorage.getItem("volt-theme") === "dark") {
+  document.body.classList.add("dark-mode");
+}
+
+updateTheme();
+
+themeButton.addEventListener("click", function() {
+  document.body.classList.toggle("dark-mode");
+
+  const theme = document.body.classList.contains("dark-mode")
+    ? "dark"
+    : "light";
+
+  localStorage.setItem("volt-theme", theme);
+
+  updateTheme();
+});
+</script>
 </body>
 </html>
