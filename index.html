@@ -151,6 +151,10 @@ body.lock{overflow:hidden}
   transition:transform .55s cubic-bezier(.2,.7,.2,1);
 }
 .prod svg{display:block;width:100%;height:auto;overflow:visible}
+/* منتج بصورة حقيقية: الخلفية البيضا بتدوب في الصفحة */
+.prod.photo{height:96%;bottom:2%;filter:none;mix-blend-mode:multiply}
+.prod.photo img{width:100%;height:100%;object-fit:contain;display:block}
+.thumb img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .product:hover .prod{transform:translate(-50%,-10px) rotate(-2.5deg) scale(1.04)}
 .tag{position:absolute;top:2%;left:2%;z-index:2;background:#111;color:#fff;padding:5px 9px;font-size:9px;font-weight:800;letter-spacing:1.5px}
 
@@ -403,12 +407,19 @@ const WHATSAPP_NUMBER = "201000000000";
 /* الألوان المتاحة */
 const COLORS = {
   BLACK:"#141414", WHITE:"#f3f3f3", GRAY:"#8e9096",
-  NAVY:"#1d2b4a", OLIVE:"#5d6647", BEIGE:"#d8c9b0"
+  NAVY:"#1d2b4a", OLIVE:"#5d6647", BEIGE:"#d8c9b0", PINK:"#f0a6c0"
 };
 
 /* المنتجات: type = tee | over | set | cap | bag     deco = logo | bolt | stripe | pocket | none */
 const items = [
- {id:1,name:"OVERSIZED TEE",     price:499, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["BLACK","WHITE","GRAY","OLIVE"]},
+ {id:1,name:"OVERSIZED TEE",     price:499, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK","GRAY"],
+  /* imgs: صورة لكل لون. لما العميل يغيّر اللون الصورة نفسها بتتبدّل */
+  imgs:{
+    WHITE:"https://cdn.phototourl.com/member/2026-10-30-5d47f84e-4b88-4d8c-bb27-be640acd96df.jpg",
+    PINK:"https://cdn.phototourl.com/member/2026-10-30-66bd4ae0-3506-4cf6-88f6-363b5fc37567.jpg",
+    BLACK:"https://cdn.phototourl.com/member/2026-10-30-9d649053-38de-44d8-ba9e-1c0f54946675.jpg",
+    GRAY:"https://cdn.phototourl.com/member/2026-10-30-4218e78d-686a-40f4-b80e-af5043edaddb.jpg"
+  }},
  {id:2,name:"ESSENTIAL TEE",     price:399, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"]},
  {id:3,name:"STREETWEAR SET",    price:1299,category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"]},
  {id:4,name:"URBAN DAILY TEE",   price:449, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"]},
@@ -494,6 +505,14 @@ function garment(p){
   return `<svg viewBox="0 0 240 240" role="img" aria-label="${p.name}">${inner}</svg>`;
 }
 
+/* صورة المنتج حسب اللون (لو متاحة) وإلا الرسم */
+function visual(p, color){
+  if(p.imgs && p.imgs[color]) return `<img src="${p.imgs[color]}" alt="${p.name} - ${color}">`;
+  return garment(p);
+}
+/* تحميل مسبق للصور عشان التبديل يبقى فوري */
+items.forEach(p => p.imgs && Object.values(p.imgs).forEach(u => { const im = new Image(); im.src = u; }));
+
 /* ---------- الحالة ---------- */
 let category = "ALL";
 let cart = [];
@@ -520,7 +539,7 @@ function render(){
       <div class="stage">
         <span class="shape s${shape}"></span>
         ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
-        <div class="prod">${garment(p)}</div>
+        <div class="prod${p.imgs ? " photo" : ""}">${visual(p, sel.color)}</div>
       </div>
       <div class="info">
         <h3>${p.name}</h3>
@@ -568,6 +587,7 @@ grid.addEventListener("click", e => {
     card.style.setProperty("--ink", ink(hex));
     card.querySelectorAll("[data-color]").forEach(b => b.classList.toggle("sel", b === colorBtn));
     card.querySelector(".cname").textContent = sel.color;
+    if(p.imgs && p.imgs[sel.color]) card.querySelector(".prod img").src = p.imgs[sel.color];
     return;
   }
   const sizeBtn = e.target.closest("[data-size]");
@@ -603,7 +623,7 @@ function updateCart(){
       const color = i.color || p.colors[0], hex = COLORS[color];
       return `
       <div class="line-item">
-        <div class="thumb" style="--c:${hex};--ink:${ink(hex)}">${garment(p)}</div>
+        <div class="thumb" style="--c:${hex};--ink:${ink(hex)}">${visual(p, color)}</div>
         <div>
           <h4>${p.name}</h4>
           <small>${color} · SIZE ${i.size}</small>
