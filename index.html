@@ -5,223 +5,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VOLT — New Collection</title>
+
+<style>
+*{box-sizing:border-box}
+:root{--bg:#fff;--text:#111;--card:#f5f5f5;--border:#ddd}
+body.dark{--bg:#111;--text:#fff;--card:#1d1d1d;--border:#333}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+
+/* ANNOUNCEMENT */
+.announcement{background:#000;color:#fff;overflow:hidden;white-space:nowrap;padding:12px 0;font-size:12px;font-weight:bold;letter-spacing:2px}
+.announcement-track{display:flex;width:max-content;animation:scroll 18s linear infinite}
+.announcement-group{display:flex;flex-shrink:0}
+.announcement-group span{padding:0 35px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HEADER */
+header{padding:20px 5%;display:flex;flex-direction:column;align-items:center;gap:16px;border-bottom:1px solid var(--border)}
+.logo{font-size:48px;font-weight:1000;letter-spacing:9px;margin:0;background:linear-gradient(90deg,#168bff,#fff,#9b45ff,#168bff);background-size:300% auto;color:transparent;-webkit-background-clip:text;background-clip:text;animation:logoColors 4s linear infinite;filter:drop-shadow(0 0 9px #448aff88)}
+@keyframes logoColors{to{background-position:300% center}}
+nav{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;font-size:12px;font-weight:bold}
+nav a:hover{opacity:.55}
+.theme-btn{background:var(--text);color:var(--bg);border:0;padding:10px 18px;cursor:pointer;font-weight:bold;border-radius:20px}
+
+/* HOME PAGE BANNER */
 .hero-banner{
-  min-height:500px;
+  min-height:520px;
   background:
-    linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.05)),
-    url('banner.jpg') center/cover no-repeat;
+    linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.08)),
+    url("https://raw.githubusercontent.com/cashierahmed9-ui/VoLT.eg/main/Designer%20Streetwear%20Brand%20_%20Thesupermade%C2%AE.jpg") center/cover no-repeat;
   display:flex;
   align-items:center;
   padding:50px 8%;
   color:white;
 }
-.banner-content p{
-  letter-spacing:4px;
-  font-size:13px;
-}
-.banner-content h1{
-  font-size:clamp(35px,6vw,75px);
-  font-weight:900;
-  margin:15px 0 25px;
-}
-.banner-content a{
-  display:inline-block;
-  background:white;
-  color:black;
-  padding:15px 30px;
-  font-weight:bold;
-  font-size:12px;
-}
-@media(max-width:600px){
-  .hero-banner{min-height:350px;padding:25px 6%}
-}
-<style>
-*{box-sizing:border-box}
-:root{
-  --bg:#fff;
-  --text:#111;
-  --card:#f5f5f5;
-  --border:#ddd;
-}
-body.dark{
-  --bg:#111;
-  --text:#fff;
-  --card:#1d1d1d;
-  --border:#333;
-}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  transition:background .3s,color .3s;
-}
-a{color:inherit;text-decoration:none}
-
-/* MOVING ANNOUNCEMENT */
-.announcement{
-  background:#000;
-  color:#fff;
-  overflow:hidden;
-  white-space:nowrap;
-  padding:12px 0;
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-.announcement-track{
-  display:flex;
-  width:max-content;
-  animation:scroll 18s linear infinite;
-}
-.announcement-group{
-  display:flex;
-  flex-shrink:0;
-}
-.announcement-group span{padding:0 35px}
-@keyframes scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
-
-/* HEADER */
-header{
-  padding:20px 5%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-  border-bottom:1px solid var(--border);
-}
-.logo{
-  font-size:48px;
-  font-weight:1000;
-  letter-spacing:9px;
-  margin:0;
-  background:linear-gradient(90deg,#168bff,#fff,#9b45ff,#168bff);
-  background-size:300% auto;
-  color:transparent;
-  -webkit-background-clip:text;
-  background-clip:text;
-  animation:logoColors 4s linear infinite;
-  filter:drop-shadow(0 0 9px #448aff88);
-}
-@keyframes logoColors{
-  to{background-position:300% center}
-}
-nav{
-  display:flex;
-  gap:22px;
-  flex-wrap:wrap;
-  justify-content:center;
-  font-size:12px;
-  font-weight:bold;
-}
-nav a:hover{opacity:.55}
-.theme-btn{
-  background:var(--text);
-  color:var(--bg);
-  border:0;
-  padding:10px 18px;
-  cursor:pointer;
-  font-weight:bold;
-  border-radius:20px;
-}
-
-/* HERO */
-.hero{
-  min-height:320px;
-  background:#171717;
-  color:white;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:35px 15px;
-}
-.hero p{font-size:11px;letter-spacing:4px}
-.hero h1{font-size:clamp(36px,7vw,72px);margin:12px 0}
-.hero a{
-  background:white;
-  color:#111;
-  padding:14px 30px;
-  font-size:11px;
-  font-weight:bold;
-  margin-top:15px;
-}
+.banner-content{max-width:600px}
+.banner-content p{letter-spacing:4px;font-size:13px}
+.banner-content h1{font-size:clamp(38px,7vw,78px);font-weight:900;margin:18px 0;line-height:1.05}
+.banner-content a{display:inline-block;background:white;color:#111;padding:15px 32px;font-weight:bold;font-size:12px;transition:.3s}
+.banner-content a:hover{background:#168bff;color:white}
 
 /* SHOP */
-.toolbar{
-  padding:28px 5% 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
+.toolbar{padding:28px 5% 12px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
 .toolbar h2{font-size:21px;margin:0}
-input{
-  padding:12px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  max-width:100%;
-  width:250px;
-}
-.filters{
-  padding:10px 5% 25px;
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-.filters button{
-  background:var(--bg);
-  color:var(--text);
-  border:1px solid var(--border);
-  padding:10px 15px;
-  cursor:pointer;
-  font-size:11px;
-}
-.filters button.active,
-.filters button:hover{
-  background:var(--text);
-  color:var(--bg);
-}
-.grid{
-  padding:0 5% 55px;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:25px 13px;
-}
+input{padding:12px;border:1px solid var(--border);background:var(--card);color:var(--text);max-width:100%;width:250px}
+.filters{padding:10px 5% 25px;display:flex;gap:9px;flex-wrap:wrap}
+.filters button{background:var(--bg);color:var(--text);border:1px solid var(--border);padding:10px 15px;cursor:pointer;font-size:11px}
+.filters button.active,.filters button:hover{background:var(--text);color:var(--bg)}
+.grid{padding:0 5% 55px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px 13px}
 .product{min-width:0;position:relative}
-.product img{
-  width:100%;
-  aspect-ratio:3/4;
-  object-fit:cover;
-  background:var(--card);
-  display:block;
-}
-.tag{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:white;
-  color:#111;
-  padding:7px;
-  font-size:10px;
-}
+.product img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--card);display:block}
+.tag{position:absolute;top:10px;left:10px;background:white;color:#111;padding:7px;font-size:10px}
 .product h3{font-size:12px;margin:12px 0 8px}
 .price{font-size:12px}
-
-/* FOOTER */
-footer{
-  background:#111;
-  color:white;
-  padding:35px 5%;
-  text-align:center;
-  font-size:12px;
-}
+footer{background:#111;color:white;padding:35px 5%;text-align:center;font-size:12px}
 footer p{color:#bbb}
 footer .logo{font-size:35px}
 
@@ -229,16 +66,10 @@ footer .logo{font-size:35px}
   header{padding:18px 4%}
   .logo{font-size:40px}
   nav{gap:13px}
-  .grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:23px 10px;
-    padding-left:4%;
-    padding-right:4%;
-  }
-  .toolbar,.filters{
-    padding-left:4%;
-    padding-right:4%;
-  }
+  .hero-banner{min-height:390px;padding:30px 6%;background-position:center}
+  .banner-content h1{font-size:43px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 10px;padding-left:4%;padding-right:4%}
+  .toolbar,.filters{padding-left:4%;padding-right:4%}
 }
 </style>
 </head>
@@ -248,44 +79,35 @@ footer .logo{font-size:35px}
 <div class="announcement">
   <div class="announcement-track">
     <div class="announcement-group">
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
+      <span>BUY 1 GET 2</span><span>BUY 1 GET 2</span>
+      <span>BUY 1 GET 2</span><span>BUY 1 GET 2</span>
     </div>
     <div class="announcement-group" aria-hidden="true">
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
-      <span>BUY 1 GET 2</span>
+      <span>BUY 1 GET 2</span><span>BUY 1 GET 2</span>
+      <span>BUY 1 GET 2</span><span>BUY 1 GET 2</span>
     </div>
   </div>
 </div>
 
 <header>
   <h1 class="logo">VOLT.</h1>
-
   <nav>
     <a href="#shop" data-filter="ALL">SHOP ALL</a>
     <a href="#shop" data-filter="T-SHIRTS">T-SHIRTS</a>
     <a href="#shop" data-filter="SETS">SETS</a>
     <a href="#shop" data-filter="ACCESSORIES">ACCESSORIES</a>
   </nav>
-
   <button class="theme-btn" id="themeToggle">🌙 DARK MODE</button>
 </header>
 
+<!-- HOME PAGE BANNER -->
 <section class="hero-banner">
   <div class="banner-content">
-    <p>VOLT NEW COLLECTION</p>
+    <p>VOLT / NEW COLLECTION</p>
     <h1>OWN YOUR STYLE.</h1>
+    <p>EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
     <a href="#shop">SHOP NOW</a>
   </div>
-</section>
-  <p>NEW SEASON / NEW ENERGY</p>
-  <h1>OWN YOUR STYLE.</h1>
-  <p>EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
-  <a href="#shop">SHOP THE COLLECTION</a>
 </section>
 
 <section id="shop">
@@ -350,11 +172,9 @@ document.querySelectorAll("[data-filter]").forEach(btn=>{
   btn.addEventListener("click",e=>{
     e.preventDefault();
     category=btn.dataset.filter;
-
     document.querySelectorAll(".filters button").forEach(b=>
       b.classList.toggle("active",b.dataset.filter===category)
     );
-
     render();
     document.getElementById("shop").scrollIntoView({behavior:"smooth"});
   });
@@ -362,7 +182,7 @@ document.querySelectorAll("[data-filter]").forEach(btn=>{
 
 search.addEventListener("input",render);
 
-/* DARK AND LIGHT MODE */
+/* DARK MODE */
 const themeToggle=document.getElementById("themeToggle");
 
 function setTheme(theme){
@@ -371,12 +191,10 @@ function setTheme(theme){
   localStorage.setItem("volt-theme",theme);
 }
 
-const savedTheme=localStorage.getItem("volt-theme")||"light";
-setTheme(savedTheme);
+setTheme(localStorage.getItem("volt-theme")||"light");
 
 themeToggle.addEventListener("click",()=>{
-  const newTheme=document.body.classList.contains("dark")?"light":"dark";
-  setTheme(newTheme);
+  setTheme(document.body.classList.contains("dark")?"light":"dark");
 });
 
 render();
