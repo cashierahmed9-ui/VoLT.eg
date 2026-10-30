@@ -5,7 +5,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VOLT — New Collection</title>
-
+.hero-banner{
+  min-height:500px;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.05)),
+    url('banner.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  padding:50px 8%;
+  color:white;
+}
+.banner-content p{
+  letter-spacing:4px;
+  font-size:13px;
+}
+.banner-content h1{
+  font-size:clamp(35px,6vw,75px);
+  font-weight:900;
+  margin:15px 0 25px;
+}
+.banner-content a{
+  display:inline-block;
+  background:white;
+  color:black;
+  padding:15px 30px;
+  font-weight:bold;
+  font-size:12px;
+}
+@media(max-width:600px){
+  .hero-banner{min-height:350px;padding:25px 6%}
+}
 <style>
 *{box-sizing:border-box}
 :root{
@@ -246,7 +275,13 @@ footer .logo{font-size:35px}
   <button class="theme-btn" id="themeToggle">🌙 DARK MODE</button>
 </header>
 
-<section class="hero">
+<section class="hero-banner">
+  <div class="banner-content">
+    <p>VOLT NEW COLLECTION</p>
+    <h1>OWN YOUR STYLE.</h1>
+    <a href="#shop">SHOP NOW</a>
+  </div>
+</section>
   <p>NEW SEASON / NEW ENERGY</p>
   <h1>OWN YOUR STYLE.</h1>
   <p>EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
