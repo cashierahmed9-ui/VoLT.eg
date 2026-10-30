@@ -155,15 +155,6 @@ body.lock{overflow:hidden}
 .prod.photo{height:96%;bottom:2%;filter:none}
 .prod.photo.blend{mix-blend-mode:multiply}                                   /* صورة JPG بخلفية بيضا */
 .prod.photo.cut{filter:drop-shadow(0 16px 12px rgba(0,0,0,.2))}              /* صورة PNG بخلفية شفافة */
-
-/* الألوان التانية بتظهر ورا اللون المختار لما تقف عليه بالماوس */
-.ghosts{position:absolute;inset:0;pointer-events:none}
-.ghost{position:absolute;left:50%;bottom:2%;width:92%;height:96%;opacity:0;transform:translateX(-50%) scale(.8);transition:transform .65s cubic-bezier(.2,.7,.2,1),opacity .45s}
-.ghost img{width:100%;height:100%;object-fit:contain;display:block}
-.ghost.blend{mix-blend-mode:multiply}
-.ghost.cut{filter:drop-shadow(0 10px 10px rgba(0,0,0,.15))}
-.product:hover .g1{opacity:1;transform:translateX(calc(-50% + 30%)) rotate(10deg) scale(.84)}
-.product:hover .g2{opacity:1;transform:translateX(calc(-50% - 30%)) rotate(-10deg) scale(.84)}
 .prod.photo img{width:100%;height:100%;object-fit:contain;display:block}
 .thumb img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .product:hover .prod{transform:translate(-50%,-10px) rotate(-2.5deg) scale(1.04)}
@@ -423,13 +414,12 @@ const COLORS = {
 
 /* المنتجات: type = tee | over | set | cap | bag     deco = logo | bolt | stripe | pocket | none */
 const items = [
- {id:1,name:"OVERSIZED TEE",     price:499, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK","GRAY"],
+ {id:1,name:"OVERSIZED TEE",     price:499, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"],
   /* imgs: صورة لكل لون. لما العميل يغيّر اللون الصورة نفسها بتتبدّل */
   imgs:{
-    WHITE:"https://cdn.phototourl.com/member/2026-10-30-5d47f84e-4b88-4d8c-bb27-be640acd96df.jpg",
-    PINK:"https://cdn.phototourl.com/member/2026-10-30-66bd4ae0-3506-4cf6-88f6-363b5fc37567.jpg",
-    BLACK:"https://cdn.phototourl.com/member/2026-10-30-9d649053-38de-44d8-ba9e-1c0f54946675.jpg",
-    GRAY:"https://cdn.phototourl.com/member/2026-10-30-4218e78d-686a-40f4-b80e-af5043edaddb.jpg"
+    WHITE:"https://cdn.phototourl.com/member/2026-10-30-078b9efc-abc8-43db-9fd8-8624ded0d532.jpg",
+    PINK:"https://cdn.phototourl.com/member/2026-10-30-0c76478a-0123-43be-ae44-98134fcddfa3.jpg",
+    BLACK:"https://cdn.phototourl.com/member/2026-10-30-6b96d8d7-9af2-45d7-95a7-e8519424fc25.jpg"
   }},
  {id:2,name:"ESSENTIAL TEE",     price:399, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"]},
  {id:3,name:"STREETWEAR SET",    price:1299,category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"]},
@@ -526,11 +516,6 @@ function cutClass(p){
   const u = Object.values(p.imgs)[0] || "";
   return /\.(png|webp)(\?|$)/i.test(u) ? "cut" : "blend";
 }
-/* الألوان التانية اللي بتظهر ورا المنتج وقت الـ hover */
-function ghosts(p, color){
-  return p.colors.filter(c => c !== color && p.imgs[c]).slice(0,2)
-    .map((c,i) => `<div class="ghost g${i+1} ${cutClass(p)}"><img src="${p.imgs[c]}" alt=""></div>`).join("");
-}
 /* تحميل مسبق للصور عشان التبديل يبقى فوري */
 items.forEach(p => p.imgs && Object.values(p.imgs).forEach(u => { const im = new Image(); im.src = u; }));
 
@@ -560,7 +545,6 @@ function render(){
       <div class="stage">
         <span class="shape s${shape}"></span>
         ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
-        ${p.imgs ? `<div class="ghosts">${ghosts(p, sel.color)}</div>` : ""}
         <div class="prod${p.imgs ? " photo " + cutClass(p) : ""}">${visual(p, sel.color)}</div>
       </div>
       <div class="info">
@@ -609,10 +593,7 @@ grid.addEventListener("click", e => {
     card.style.setProperty("--ink", ink(hex));
     card.querySelectorAll("[data-color]").forEach(b => b.classList.toggle("sel", b === colorBtn));
     card.querySelector(".cname").textContent = sel.color;
-    if(p.imgs && p.imgs[sel.color]){
-      card.querySelector(".prod img").src = p.imgs[sel.color];
-      card.querySelector(".ghosts").innerHTML = ghosts(p, sel.color);
-    }
+    if(p.imgs && p.imgs[sel.color]) card.querySelector(".prod img").src = p.imgs[sel.color];
     return;
   }
   const sizeBtn = e.target.closest("[data-size]");
