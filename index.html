@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,379 +7,208 @@
 <title>VOLT — New Collection</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+:root{
+  --bg:#fff;
+  --text:#111;
+  --card:#f5f5f5;
+  --border:#ddd;
 }
-
-body {
-  margin: 0;
-  background: #fff;
-  color: #111;
-  font-family: Arial, sans-serif;
-  transition: background .3s, color .3s;
+body.dark{
+  --bg:#111;
+  --text:#fff;
+  --card:#1d1d1d;
+  --border:#333;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  transition:background .3s,color .3s;
 }
+a{color:inherit;text-decoration:none}
 
-/* ANNOUNCEMENT */
-.announcement {
-  background: #000;
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 100%;
-  padding: 12px 0;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
+/* MOVING ANNOUNCEMENT */
+.announcement{
+  background:#000;
+  color:#fff;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:12px 0;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:2px;
 }
-
-.announcement-track {
-  display: flex;
-  width: max-content;
-  animation: promo-scroll 18s linear infinite;
+.announcement-track{
+  display:flex;
+  width:max-content;
+  animation:scroll 18s linear infinite;
 }
-
-.announcement-group {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
+.announcement-group{
+  display:flex;
+  flex-shrink:0;
 }
-
-.announcement-group span {
-  padding: 0 30px;
-}
-
-@keyframes promo-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.announcement-group span{padding:0 35px}
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 
 /* HEADER */
-header {
-  position: relative;
-  min-height: 110px;
-  padding: 20px 4%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 18px;
-  border-bottom: 1px solid #eee;
-  background: #fff;
-  transition: background .3s;
+header{
+  padding:20px 5%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  border-bottom:1px solid var(--border);
 }
-
-header .logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(38px, 5vw, 60px);
-  font-weight: 1000;
-  letter-spacing: 9px;
-  white-space: nowrap;
-
-  background: linear-gradient(
-    90deg,
-    #00eaff,
-    #ffffff,
-    #a855f7,
-    #00eaff,
-    #ffffff,
-    #a855f7
-  );
-
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-
-  animation: volt-shine 3s linear infinite;
-
-  filter:
-    drop-shadow(0 0 7px #00eaff)
-    drop-shadow(0 0 15px #a855f7);
+.logo{
+  font-size:48px;
+  font-weight:1000;
+  letter-spacing:9px;
+  margin:0;
+  background:linear-gradient(90deg,#168bff,#fff,#9b45ff,#168bff);
+  background-size:300% auto;
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation:logoColors 4s linear infinite;
+  filter:drop-shadow(0 0 9px #448aff88);
 }
-
-@keyframes volt-shine {
-  from { background-position: 0% center; }
-  to { background-position: 300% center; }
+@keyframes logoColors{
+  to{background-position:300% center}
 }
-
-nav {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  font-size: 11px;
-  font-weight: bold;
-  flex-wrap: wrap;
+nav{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+  justify-content:center;
+  font-size:12px;
+  font-weight:bold;
 }
-
-nav a:hover {
-  opacity: .55;
-}
-
-/* THEME BUTTON */
-.theme-toggle {
-  background: #111;
-  color: white;
-  border: 1px solid #111;
-  padding: 11px 15px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: bold;
-  transition: .3s;
-  white-space: nowrap;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.05);
+nav a:hover{opacity:.55}
+.theme-btn{
+  background:var(--text);
+  color:var(--bg);
+  border:0;
+  padding:10px 18px;
+  cursor:pointer;
+  font-weight:bold;
+  border-radius:20px;
 }
 
 /* HERO */
-.hero {
-  min-height: 300px;
-  background: #171717;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 35px 15px;
+.hero{
+  min-height:320px;
+  background:#171717;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:35px 15px;
 }
-
-.hero p {
-  font-size: 11px;
-  letter-spacing: 4px;
-}
-
-.hero h1 {
-  font-size: clamp(36px, 7vw, 72px);
-  margin: 12px 0;
-  letter-spacing: 3px;
-}
-
-.hero a {
-  background: white;
-  color: #111;
-  padding: 14px 30px;
-  font-size: 11px;
-  font-weight: bold;
-  margin-top: 15px;
+.hero p{font-size:11px;letter-spacing:4px}
+.hero h1{font-size:clamp(36px,7vw,72px);margin:12px 0}
+.hero a{
+  background:white;
+  color:#111;
+  padding:14px 30px;
+  font-size:11px;
+  font-weight:bold;
+  margin-top:15px;
 }
 
 /* SHOP */
-.toolbar {
-  padding: 28px 5% 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
+.toolbar{
+  padding:28px 5% 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
-
-.toolbar h2 {
-  font-size: 21px;
-  margin: 0;
+.toolbar h2{font-size:21px;margin:0}
+input{
+  padding:12px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  max-width:100%;
+  width:250px;
 }
-
-input {
-  padding: 12px;
-  border: 1px solid #ddd;
-  max-width: 100%;
-  width: 250px;
+.filters{
+  padding:10px 5% 25px;
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
 }
-
-.filters {
-  padding: 10px 5% 25px;
-  display: flex;
-  gap: 9px;
-  flex-wrap: wrap;
+.filters button{
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:10px 15px;
+  cursor:pointer;
+  font-size:11px;
 }
-
-.filters button {
-  background: white;
-  color: #111;
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 11px;
-}
-
 .filters button.active,
-.filters button:hover {
-  background: #111;
-  color: white;
+.filters button:hover{
+  background:var(--text);
+  color:var(--bg);
 }
-
-.grid {
-  padding: 0 5% 55px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 25px 13px;
+.grid{
+  padding:0 5% 55px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:25px 13px;
 }
-
-.product {
-  min-width: 0;
-  position: relative;
+.product{min-width:0;position:relative}
+.product img{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  background:var(--card);
+  display:block;
 }
-
-.product img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  background: #eee;
-  display: block;
+.tag{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:white;
+  color:#111;
+  padding:7px;
+  font-size:10px;
 }
-
-.tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: white;
-  color: #111;
-  padding: 7px;
-  font-size: 10px;
-}
-
-.product h3 {
-  font-size: 12px;
-  margin: 12px 0 8px;
-  font-weight: 600;
-}
-
-.price {
-  font-size: 12px;
-}
+.product h3{font-size:12px;margin:12px 0 8px}
+.price{font-size:12px}
 
 /* FOOTER */
-footer {
-  background: #111;
-  color: white;
-  padding: 35px 5%;
-  text-align: center;
-  font-size: 12px;
+footer{
+  background:#111;
+  color:white;
+  padding:35px 5%;
+  text-align:center;
+  font-size:12px;
 }
+footer p{color:#bbb}
+footer .logo{font-size:35px}
 
-footer .logo {
-  font-size: 40px;
-  font-weight: 1000;
-  letter-spacing: 7px;
-  background: linear-gradient(90deg,#00eaff,#fff,#a855f7,#00eaff);
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: volt-shine 3s linear infinite;
-}
-
-footer p {
-  color: #bbb;
-}
-
-/* DARK MODE */
-body.dark-mode {
-  background: #111;
-  color: #fff;
-}
-
-body.dark-mode header {
-  background: #111;
-  color: white;
-  border-color: #333;
-}
-
-body.dark-mode .toolbar,
-body.dark-mode #shop {
-  background: #111;
-  color: white;
-}
-
-body.dark-mode .filters button {
-  background: #222;
-  color: white;
-  border-color: #444;
-}
-
-body.dark-mode .filters button.active,
-body.dark-mode .filters button:hover {
-  background: white;
-  color: black;
-}
-
-body.dark-mode input {
-  background: #222;
-  color: white;
-  border-color: #555;
-}
-
-body.dark-mode input::placeholder {
-  color: #aaa;
-}
-
-body.dark-mode .product h3,
-body.dark-mode .price {
-  color: white;
-}
-
-body.dark-mode .theme-toggle {
-  background: white;
-  color: #111;
-  border-color: white;
-}
-
-body.dark-mode footer {
-  background: #050505;
-}
-
-/* MOBILE */
-@media(max-width:700px) {
-  header {
-    min-height: 145px;
-    padding: 85px 4% 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
+@media(max-width:700px){
+  header{padding:18px 4%}
+  .logo{font-size:40px}
+  nav{gap:13px}
+  .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:23px 10px;
+    padding-left:4%;
+    padding-right:4%;
   }
-
-  header .logo {
-    top: 35px;
-    font-size: 38px;
-    letter-spacing: 7px;
-  }
-
-  nav {
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .theme-toggle {
-    margin-top: 5px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 23px 10px;
-    padding-left: 4%;
-    padding-right: 4%;
-  }
-
-  .toolbar,
-  .filters {
-    padding-left: 4%;
-    padding-right: 4%;
-  }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
+  .toolbar,.filters{
+    padding-left:4%;
+    padding-right:4%;
   }
 }
 </style>
@@ -386,7 +216,6 @@ body.dark-mode footer {
 
 <body>
 
-<!-- ANNOUNCEMENT -->
 <div class="announcement">
   <div class="announcement-track">
     <div class="announcement-group">
@@ -404,10 +233,8 @@ body.dark-mode footer {
   </div>
 </div>
 
-<!-- HEADER -->
 <header>
-
-  <a class="logo" href="#">VOLT.</a>
+  <h1 class="logo">VOLT.</h1>
 
   <nav>
     <a href="#shop" data-filter="ALL">SHOP ALL</a>
@@ -416,13 +243,9 @@ body.dark-mode footer {
     <a href="#shop" data-filter="ACCESSORIES">ACCESSORIES</a>
   </nav>
 
-  <button class="theme-toggle" id="themeToggle" type="button">
-    🌙 Dark
-  </button>
-
+  <button class="theme-btn" id="themeToggle">🌙 DARK MODE</button>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <p>NEW SEASON / NEW ENERGY</p>
   <h1>OWN YOUR STYLE.</h1>
@@ -430,17 +253,10 @@ body.dark-mode footer {
   <a href="#shop">SHOP THE COLLECTION</a>
 </section>
 
-<!-- SHOP -->
 <section id="shop">
-
   <div class="toolbar">
     <h2>NEW COLLECTION</h2>
-    <input
-      id="search"
-      type="search"
-      placeholder="Search products..."
-      aria-label="Search products"
-    >
+    <input id="search" type="search" placeholder="Search products..." aria-label="Search products">
   </div>
 
   <div class="filters">
@@ -451,10 +267,8 @@ body.dark-mode footer {
   </div>
 
   <div class="grid" id="products"></div>
-
 </section>
 
-<!-- FOOTER -->
 <footer>
   <h2 class="logo">VOLT.</h2>
   <p>YOUR STYLE. YOUR RULES.</p>
@@ -463,162 +277,74 @@ body.dark-mode footer {
 </footer>
 
 <script>
-
-/* PRODUCTS */
 const items = [
- {
-  name:"OVERSIZED BLACK TEE",
-  price:499,
-  category:"T-SHIRTS",
-  tag:"NEW",
-  img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"ESSENTIAL WHITE TEE",
-  price:399,
-  category:"T-SHIRTS",
-  tag:"BESTSELLER",
-  img:"https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"STREETWEAR SET",
-  price:1299,
-  category:"SETS",
-  tag:"NEW",
-  img:"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"URBAN DAILY TEE",
-  price:449,
-  category:"T-SHIRTS",
-  tag:"",
-  img:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"MINIMAL BLACK CAP",
-  price:299,
-  category:"ACCESSORIES",
-  tag:"",
-  img:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"CLASSIC COTTON TEE",
-  price:499,
-  category:"T-SHIRTS",
-  tag:"NEW",
-  img:"https://images.unsplash.com/photo-1527719327859-c6ce80353573?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"CASUAL TWO PIECE",
-  price:1199,
-  category:"SETS",
-  tag:"",
-  img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=650&q=80"
- },
- {
-  name:"EVERYDAY BAG",
-  price:349,
-  category:"ACCESSORIES",
-  tag:"",
-  img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=650&q=80"
- }
+ {name:"OVERSIZED BLACK TEE",price:499,category:"T-SHIRTS",tag:"NEW",img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=650&q=80"},
+ {name:"ESSENTIAL WHITE TEE",price:399,category:"T-SHIRTS",tag:"BESTSELLER",img:"https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=650&q=80"},
+ {name:"STREETWEAR SET",price:1299,category:"SETS",tag:"NEW",img:"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=650&q=80"},
+ {name:"URBAN DAILY TEE",price:449,category:"T-SHIRTS",tag:"",img:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=650&q=80"},
+ {name:"MINIMAL BLACK CAP",price:299,category:"ACCESSORIES",tag:"",img:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=650&q=80"},
+ {name:"CLASSIC COTTON TEE",price:499,category:"T-SHIRTS",tag:"NEW",img:"https://images.unsplash.com/photo-1527719327859-c6ce80353573?auto=format&fit=crop&w=650&q=80"},
+ {name:"CASUAL TWO PIECE",price:1199,category:"SETS",tag:"",img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=650&q=80"},
+ {name:"EVERYDAY BAG",price:349,category:"ACCESSORIES",tag:"",img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=650&q=80"}
 ];
 
-let category = "ALL";
+let category="ALL";
+const grid=document.getElementById("products");
+const search=document.getElementById("search");
 
-const grid = document.getElementById("products");
-const search = document.getElementById("search");
-
-/* RENDER PRODUCTS */
-function render() {
-
-  const term = search.value.toLowerCase().trim();
-
-  const filtered = items.filter(p =>
-    (category === "ALL" || p.category === category) &&
+function render(){
+  const term=search.value.toLowerCase().trim();
+  const filtered=items.filter(p=>
+    (category==="ALL"||p.category===category)&&
     p.name.toLowerCase().includes(term)
   );
 
-  grid.innerHTML = filtered.map(p => `
+  grid.innerHTML=filtered.map(p=>`
     <article class="product">
-      ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
+      ${p.tag?`<span class="tag">${p.tag}</span>`:""}
       <img src="${p.img}" alt="${p.name}" loading="lazy">
       <h3>${p.name}</h3>
-      <div class="price">
-        ${p.price.toLocaleString("en-US")} EGP
-      </div>
+      <div class="price">${p.price.toLocaleString("en-US")} EGP</div>
     </article>
   `).join("");
 
-  if (!filtered.length) {
-    grid.innerHTML = "<p>No products found.</p>";
-  }
+  if(!filtered.length) grid.innerHTML="<p>No products found.</p>";
 }
 
-/* FILTERS */
-document.querySelectorAll("[data-filter]").forEach(btn => {
-
-  btn.addEventListener("click", e => {
-
+document.querySelectorAll("[data-filter]").forEach(btn=>{
+  btn.addEventListener("click",e=>{
     e.preventDefault();
+    category=btn.dataset.filter;
 
-    category = btn.dataset.filter;
-
-    document.querySelectorAll(".filters button").forEach(b => {
-      b.classList.toggle(
-        "active",
-        b.dataset.filter === category
-      );
-    });
+    document.querySelectorAll(".filters button").forEach(b=>
+      b.classList.toggle("active",b.dataset.filter===category)
+    );
 
     render();
-
-    document.getElementById("shop").scrollIntoView({
-      behavior: "smooth"
-    });
-
+    document.getElementById("shop").scrollIntoView({behavior:"smooth"});
   });
-
 });
 
-search.addEventListener("input", render);
+search.addEventListener("input",render);
 
-/* DARK / LIGHT MODE */
-const themeButton = document.getElementById("themeToggle");
+/* DARK AND LIGHT MODE */
+const themeToggle=document.getElementById("themeToggle");
 
-function updateTheme() {
-
-  const isDark = document.body.classList.contains("dark-mode");
-
-  themeButton.textContent = isDark ? "☀️ Light" : "🌙 Dark";
-
+function setTheme(theme){
+  document.body.classList.toggle("dark",theme==="dark");
+  themeToggle.textContent=theme==="dark"?"☀️ LIGHT MODE":"🌙 DARK MODE";
+  localStorage.setItem("volt-theme",theme);
 }
 
-const savedTheme = localStorage.getItem("volt-theme");
+const savedTheme=localStorage.getItem("volt-theme")||"light";
+setTheme(savedTheme);
 
-if (savedTheme === "dark") {
-  document.body.classList.add("dark-mode");
-}
-
-updateTheme();
-
-themeButton.addEventListener("click", () => {
-
-  document.body.classList.toggle("dark-mode");
-
-  const theme = document.body.classList.contains("dark-mode")
-    ? "dark"
-    : "light";
-
-  localStorage.setItem("volt-theme", theme);
-
-  updateTheme();
-
+themeToggle.addEventListener("click",()=>{
+  const newTheme=document.body.classList.contains("dark")?"light":"dark";
+  setTheme(newTheme);
 });
 
-/* START */
 render();
-
 </script>
 
 </body>
