@@ -4,7 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VOLT — New Collection</title>
+header {
+  position: relative !important;
+  min-height: 110px !important;
+}
 
+header a.logo {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+
+  font-size: 65px !important;
+  font-weight: 1000 !important;
+  letter-spacing: 10px !important;
+
+  background: linear-gradient(
+    90deg,
+    #00eaff,
+    #ffffff,
+    #a855f7,
+    #00eaff
+  ) !important;
+
+  background-size: 300% 100% !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+
+  animation: volt-shine 3s linear infinite !important;
+
+  filter:
+    drop-shadow(0 0 7px #00eaff)
+    drop-shadow(0 0 15px #a855f7) !important;
+}
+
+@media(max-width:700px) {
+  header a.logo {
+    top: 38px !important;
+    font-size: 40px !important;
+  }
+}
 <style>
 * {
   box-sizing: border-box;
