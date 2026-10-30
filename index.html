@@ -114,7 +114,7 @@ body.lock{overflow:hidden}
 .section-head{text-align:center;padding:90px 4% 34px}
 .section-head small{font-size:11px;letter-spacing:5px;color:var(--violet);font-weight:700}
 .section-head h2{font-size:clamp(28px,4vw,44px);letter-spacing:2px;margin-top:12px;color:#111}
-.toolbar{max-width:1320px;margin:0 auto;padding:0 4% 44px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.toolbar{max-width:1400px;margin:0 auto;padding:0 4% 44px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .filters button{background:transparent;color:#111;border:1px solid #dcdce0;padding:11px 20px;font-size:11px;font-weight:700;letter-spacing:1.5px;transition:.25s}
 .filters button:hover{border-color:#111}
@@ -124,7 +124,7 @@ body.lock{overflow:hidden}
 .search input:focus{border-color:var(--violet)}
 .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:#888;fill:none;stroke-width:2}
 
-.grid{max-width:1320px;margin:0 auto;padding:0 4% 70px;display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:46px 26px}
+.grid{max-width:1400px;margin:0 auto;padding:0 4% 70px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:56px 34px}
 .product{min-width:0;--c:#141414;--ink:#fff;text-align:center}
 
 /* المنتج لوحده + شكل مميز خلفه */
@@ -152,7 +152,18 @@ body.lock{overflow:hidden}
 }
 .prod svg{display:block;width:100%;height:auto;overflow:visible}
 /* منتج بصورة حقيقية: الخلفية البيضا بتدوب في الصفحة */
-.prod.photo{height:96%;bottom:2%;filter:none;mix-blend-mode:multiply}
+.prod.photo{height:96%;bottom:2%;filter:none}
+.prod.photo.blend{mix-blend-mode:multiply}                                   /* صورة JPG بخلفية بيضا */
+.prod.photo.cut{filter:drop-shadow(0 16px 12px rgba(0,0,0,.2))}              /* صورة PNG بخلفية شفافة */
+
+/* الألوان التانية بتظهر ورا اللون المختار لما تقف عليه بالماوس */
+.ghosts{position:absolute;inset:0;pointer-events:none}
+.ghost{position:absolute;left:50%;bottom:2%;width:92%;height:96%;opacity:0;transform:translateX(-50%) scale(.8);transition:transform .65s cubic-bezier(.2,.7,.2,1),opacity .45s}
+.ghost img{width:100%;height:100%;object-fit:contain;display:block}
+.ghost.blend{mix-blend-mode:multiply}
+.ghost.cut{filter:drop-shadow(0 10px 10px rgba(0,0,0,.15))}
+.product:hover .g1{opacity:1;transform:translateX(calc(-50% + 30%)) rotate(10deg) scale(.84)}
+.product:hover .g2{opacity:1;transform:translateX(calc(-50% - 30%)) rotate(-10deg) scale(.84)}
 .prod.photo img{width:100%;height:100%;object-fit:contain;display:block}
 .thumb img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .product:hover .prod{transform:translate(-50%,-10px) rotate(-2.5deg) scale(1.04)}
@@ -510,6 +521,16 @@ function visual(p, color){
   if(p.imgs && p.imgs[color]) return `<img src="${p.imgs[color]}" alt="${p.name} - ${color}">`;
   return garment(p);
 }
+/* PNG/WEBP = خلفية شفافة، غير كده (JPG) بنخلي الخلفية البيضا تدوب */
+function cutClass(p){
+  const u = Object.values(p.imgs)[0] || "";
+  return /\.(png|webp)(\?|$)/i.test(u) ? "cut" : "blend";
+}
+/* الألوان التانية اللي بتظهر ورا المنتج وقت الـ hover */
+function ghosts(p, color){
+  return p.colors.filter(c => c !== color && p.imgs[c]).slice(0,2)
+    .map((c,i) => `<div class="ghost g${i+1} ${cutClass(p)}"><img src="${p.imgs[c]}" alt=""></div>`).join("");
+}
 /* تحميل مسبق للصور عشان التبديل يبقى فوري */
 items.forEach(p => p.imgs && Object.values(p.imgs).forEach(u => { const im = new Image(); im.src = u; }));
 
@@ -539,7 +560,8 @@ function render(){
       <div class="stage">
         <span class="shape s${shape}"></span>
         ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
-        <div class="prod${p.imgs ? " photo" : ""}">${visual(p, sel.color)}</div>
+        ${p.imgs ? `<div class="ghosts">${ghosts(p, sel.color)}</div>` : ""}
+        <div class="prod${p.imgs ? " photo " + cutClass(p) : ""}">${visual(p, sel.color)}</div>
       </div>
       <div class="info">
         <h3>${p.name}</h3>
@@ -587,7 +609,10 @@ grid.addEventListener("click", e => {
     card.style.setProperty("--ink", ink(hex));
     card.querySelectorAll("[data-color]").forEach(b => b.classList.toggle("sel", b === colorBtn));
     card.querySelector(".cname").textContent = sel.color;
-    if(p.imgs && p.imgs[sel.color]) card.querySelector(".prod img").src = p.imgs[sel.color];
+    if(p.imgs && p.imgs[sel.color]){
+      card.querySelector(".prod img").src = p.imgs[sel.color];
+      card.querySelector(".ghosts").innerHTML = ghosts(p, sel.color);
+    }
     return;
   }
   const sizeBtn = e.target.closest("[data-size]");
