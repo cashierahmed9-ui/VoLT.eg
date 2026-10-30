@@ -282,6 +282,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
       <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav class="nav" id="nav">
+      <a href="#top" id="homeLink">HOME</a>
       <a href="#shop" data-filter="ALL">SHOP ALL</a>
       <a href="#shop" data-filter="T-SHIRTS">T-SHIRTS</a>
       <a href="#shop" data-filter="SETS">SETS</a>
@@ -659,6 +660,11 @@ $("#searchBtn").addEventListener("click", () => {
   setTimeout(() => search.focus(), 600);
 });
 $("#burger").addEventListener("click", () => document.body.classList.toggle("menu-open"));
+$("#homeLink").addEventListener("click", e => {
+  e.preventDefault();
+  document.body.classList.remove("menu-open");
+  window.scrollTo({top:0, behavior:"smooth"});
+});
 
 const header = $("#header");
 const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
