@@ -44,6 +44,78 @@ header a.logo {
     top: 38px !important;
     font-size: 40px !important;
   }
+}/* THEME SWITCHER */
+.theme-toggle {
+  background: #111;
+  color: white;
+  border: 1px solid #777;
+  padding: 10px 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* DARK MODE */
+body.dark-mode {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+body.dark-mode header,
+body.dark-mode .toolbar {
+  background: #111 !important;
+  color: #fff !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode .filters button {
+  background: #222;
+  color: white;
+  border-color: #444;
+}
+
+body.dark-mode .filters button.active {
+  background: white;
+  color: black;
+}
+
+body.dark-mode input {
+  background: #222;
+  color: white;
+  border-color: #555;
+}
+
+body.dark-mode input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .product h3,
+body.dark-mode .price,
+body.dark-mode .toolbar h2,
+body.dark-mode nav a {
+  color: white;
+}
+
+body.dark-mode footer {
+  background: #050505;
+}
+
+body.dark-mode .theme-toggle {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+@media(max-width:700px) {
+  .theme-toggle {
+    margin-top: 10px;
+  }
 }
 <style>
 * {
