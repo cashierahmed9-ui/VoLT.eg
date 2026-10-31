@@ -22,6 +22,7 @@
   --blue:#168bff;
   --violet:#9b45ff;
   --ann-h:38px;
+  --hero-img:url("https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg");
 }
 :root[data-theme="dark"]{
   /* NIGHT MODE */
@@ -70,17 +71,33 @@ body.lock{overflow:hidden}
 }
 @keyframes logoColors{to{background-position:300% center}}
 
-/* HERO LOGO: أبيض وعليه أسود ماشي */
+/* HERO BRAND: كلمة VOLT بتأثير LED ماشي + نسر بيرفرف تحتها */
+.hero-brand{position:absolute;left:4%;top:120px;z-index:2;display:flex;flex-direction:column;align-items:center;width:max-content}
 .hero-logo{
-  position:absolute;left:4%;top:120px;z-index:2;
+  position:relative;
   font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:.08em;line-height:1;
-  background:linear-gradient(90deg,#fff 0%,#fff 38%,#000 50%,#fff 62%,#fff 100%);
-  background-size:200% auto;
+  /* الضوء الماشي (LED) */
+  background:linear-gradient(100deg,#0d2d7a 0%,#168bff 30%,#ffffff 46%,#c58bff 54%,#9b45ff 70%,#0d2d7a 100%);
+  background-size:250% auto;
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:heroLogo 4s linear infinite;
-  filter:drop-shadow(0 0 1px rgba(255,255,255,.55)) drop-shadow(0 4px 18px rgba(0,0,0,.5));
+  animation:ledRun 3.2s linear infinite;
+  filter:drop-shadow(0 0 6px rgba(22,139,255,.8)) drop-shadow(0 0 22px rgba(155,69,255,.55));
 }
-@keyframes heroLogo{to{background-position:200% center}}
+/* شبكة النقط اللي بتدي إحساس لمبات LED */
+.hero-logo::after{
+  content:attr(data-text);position:absolute;inset:0;
+  background:radial-gradient(circle at center,transparent 0 1.1px,rgba(0,0,0,.6) 1.5px) 0 0/5px 5px;
+  -webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none;
+}
+@keyframes ledRun{to{background-position:-250% center}}
+
+.eagle{width:clamp(120px,15vw,210px);margin-top:6px;overflow:visible;animation:eagleFly 5s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(22,139,255,.75)) drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.eagle .wing{transform-box:view-box;animation:flap .9s ease-in-out infinite}
+.eagle .wing-l{transform-origin:96px 40px}
+.eagle .wing-r{transform-origin:104px 40px;animation-name:flapR}
+@keyframes flap{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(16deg)}}
+@keyframes flapR{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-16deg)}}
+@keyframes eagleFly{0%,100%{transform:translate(-14px,2px)}25%{transform:translate(0,-7px)}50%{transform:translate(14px,2px)}75%{transform:translate(0,7px)}}
 
 .actions{display:flex;justify-content:flex-end;align-items:center;gap:6px}
 .icon-btn{background:none;border:0;color:inherit;width:42px;height:42px;display:grid;place-items:center;position:relative;border-radius:50%;transition:background .2s}
@@ -104,7 +121,7 @@ body.lock{overflow:hidden}
   background:
     linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.25) 50%,rgba(0,0,0,0) 68%),
     linear-gradient(0deg,rgba(11,11,12,.9) 0%,rgba(11,11,12,0) 38%),
-    url("https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg") center top/cover no-repeat;
+    var(--hero-img) center top/cover no-repeat;
 }
 .hero-content{padding:0 4% 90px;max-width:720px;animation:rise 1s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -256,12 +273,12 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   body.menu-open .site-header{color:var(--text)}
   .theme-label{display:none}
   .theme-btn{width:38px;padding:0;justify-content:center;margin-right:2px}
-  .hero-logo{top:92px}
+  .hero-brand{top:92px}
   /* الموبايل: الصورة كاملة فوق (من غير قص)، والكلام تحتها على خلفية غامقة */
   .hero{
     height:auto;min-height:0;flex-direction:column;justify-content:flex-end;
     padding-top:calc(100vw * var(--hero-r, 1.25));
-    background:#0b0b0c url("https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg") center top/100% auto no-repeat;
+    background:#0b0b0c var(--hero-img) center top/100% auto no-repeat;
   }
   .hero::after{
     content:"";position:absolute;left:0;right:0;top:0;height:calc(100vw * var(--hero-r, 1.25));pointer-events:none;z-index:0;
@@ -347,7 +364,30 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-logo" aria-label="VOLT">VOLT.</div>
+  <div class="hero-brand">
+    <div class="hero-logo" data-text="VOLT." aria-label="VOLT">VOLT.</div>
+    <svg class="eagle" viewBox="0 0 200 84" aria-hidden="true">
+      <defs>
+        <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset="1" stop-color="#9ec9ff"/>
+        </linearGradient>
+        <path id="wingShape" d="M96 38 C72 20 42 17 6 30 L19 32 L5 39 L20 41 L11 49 L30 46 L25 55 C52 51 78 51 96 46 Z"/>
+      </defs>
+      <!-- الجناح الشمال -->
+      <g class="wing wing-l"><use href="#wingShape" fill="url(#eg)"/></g>
+      <!-- الجناح اليمين (مقلوب) -->
+      <g class="wing wing-r"><g transform="translate(200 0) scale(-1 1)"><use href="#wingShape" fill="url(#eg)"/></g></g>
+      <!-- الذيل -->
+      <path d="M92 54 L89 76 L100 70 L111 76 L108 54 Z" fill="url(#eg)"/>
+      <!-- الجسم -->
+      <ellipse cx="100" cy="42" rx="7.5" ry="15" fill="url(#eg)"/>
+      <!-- الراس والمنقار -->
+      <circle cx="100" cy="25" r="5.6" fill="#fff"/>
+      <path d="M96.6 28 L100 35 L103.4 28 Z" fill="#ffb300"/>
+      <circle cx="98.2" cy="24.2" r="1" fill="#0b0b0c"/><circle cx="101.8" cy="24.2" r="1" fill="#0b0b0c"/>
+    </svg>
+  </div>
   <div class="hero-content">
     <div class="eyebrow"><i></i>LIVE NOW / NEW COLLECTION</div>
     <h1>OWN YOUR<br>STYLE.</h1>
@@ -459,11 +499,15 @@ const INSTAGRAM_USER = "volt.eg";
 document.getElementById("waFloat").href = `https://wa.me/${WHATSAPP_NUMBER}`;
 document.getElementById("igFloat").href = `https://instagram.com/${INSTAGRAM_USER}`;
 
-/* نسبة صورة الهيرو (عشان تظهر كاملة على الموبايل) */
+/* ====== صورة البانر: حط هنا الرابط المباشر للصورة (اللي بيبدأ بـ https://i.ibb.co/ وبينتهي بـ .jpg أو .png) ====== */
+const BANNER_URL = "https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg";
+
+/* بيطبق الصورة على البانر + بيحسب نسبتها عشان تظهر كاملة على الموبايل */
 (function(){
+  document.documentElement.style.setProperty("--hero-img", `url("${BANNER_URL}")`);
   const im = new Image();
   im.onload = () => document.querySelector(".hero").style.setProperty("--hero-r", im.naturalHeight / im.naturalWidth);
-  im.src = "https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg";
+  im.src = BANNER_URL;
 })();
 
 /* الألوان المتاحة */
