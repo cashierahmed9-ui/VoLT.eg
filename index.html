@@ -77,11 +77,12 @@ body.lock{overflow:hidden}
   position:relative;
   font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:.08em;line-height:1;
   /* الضوء الماشي (LED) */
-  background:linear-gradient(100deg,#0d2d7a 0%,#168bff 30%,#ffffff 46%,#c58bff 54%,#9b45ff 70%,#0d2d7a 100%);
+  background:linear-gradient(100deg,#050505 0%,#050505 28%,#ffffff 44%,#ffffff 56%,#050505 72%,#050505 100%);
   background-size:250% auto;
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:ledRun 3.2s linear infinite;
-  filter:drop-shadow(0 0 6px rgba(22,139,255,.8)) drop-shadow(0 0 22px rgba(155,69,255,.55));
+  -webkit-text-stroke:1.5px rgba(255,255,255,.55);
+  animation:ledRun 3s linear infinite;
+  filter:drop-shadow(0 0 5px rgba(255,255,255,.55)) drop-shadow(0 4px 16px rgba(0,0,0,.6));
 }
 /* شبكة النقط اللي بتدي إحساس لمبات LED */
 .hero-logo::after{
@@ -91,12 +92,12 @@ body.lock{overflow:hidden}
 }
 @keyframes ledRun{to{background-position:-250% center}}
 
-.eagle{width:clamp(120px,15vw,210px);margin-top:6px;overflow:visible;animation:eagleFly 5s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(22,139,255,.75)) drop-shadow(0 6px 10px rgba(0,0,0,.45))}
-.eagle .wing{transform-box:view-box;animation:flap .9s ease-in-out infinite}
-.eagle .wing-l{transform-origin:96px 40px}
-.eagle .wing-r{transform-origin:104px 40px;animation-name:flapR}
-@keyframes flap{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(16deg)}}
-@keyframes flapR{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-16deg)}}
+.eagle{width:clamp(150px,19vw,270px);margin-top:4px;overflow:visible;animation:eagleFly 5s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(255,255,255,.35)) drop-shadow(0 8px 12px rgba(0,0,0,.65))}
+.eagle .wing{transform-box:view-box;animation:flap 1s ease-in-out infinite}
+.eagle .wing-l{transform-origin:112px 52px}
+.eagle .wing-r{transform-origin:128px 52px;animation-name:flapR}
+@keyframes flap{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(18deg)}}
+@keyframes flapR{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-18deg)}}
 @keyframes eagleFly{0%,100%{transform:translate(-14px,2px)}25%{transform:translate(0,-7px)}50%{transform:translate(14px,2px)}75%{transform:translate(0,7px)}}
 
 .actions{display:flex;justify-content:flex-end;align-items:center;gap:6px}
