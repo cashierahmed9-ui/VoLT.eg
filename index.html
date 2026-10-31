@@ -22,7 +22,7 @@
   --blue:#168bff;
   --violet:#9b45ff;
   --ann-h:38px;
-  --hero-img:url("https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg");
+  --hero-img:url("https://cdn.imagetourls.com/uploads/tyImg/HClrylsg.jpg");
 }
 :root[data-theme="dark"]{
   /* NIGHT MODE */
@@ -72,10 +72,10 @@ body.lock{overflow:hidden}
 @keyframes logoColors{to{background-position:300% center}}
 
 /* HERO BRAND: كلمة VOLT بتأثير LED ماشي + نسر بيرفرف تحتها */
-.hero-brand{position:absolute;left:4%;top:120px;z-index:2;display:flex;flex-direction:column;align-items:center;width:max-content}
+.hero-brand{position:relative;margin:0 0 12px 4%;z-index:2;display:flex;flex-direction:column;align-items:center;width:max-content}
 .hero-logo{
   position:relative;
-  font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:.08em;line-height:1;
+  font-size:clamp(52px,7vw,92px);font-weight:900;letter-spacing:.08em;line-height:1;
   /* الضوء الماشي (LED) */
   background:linear-gradient(100deg,#050505 0%,#050505 28%,#ffffff 44%,#ffffff 56%,#050505 72%,#050505 100%);
   background-size:250% auto;
@@ -92,7 +92,7 @@ body.lock{overflow:hidden}
 }
 @keyframes ledRun{to{background-position:-250% center}}
 
-.eagle{width:clamp(150px,19vw,270px);margin-top:4px;overflow:visible;animation:eagleFly 5s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(255,255,255,.35)) drop-shadow(0 8px 12px rgba(0,0,0,.65))}
+.eagle{width:clamp(120px,13vw,190px);margin-top:4px;overflow:visible;animation:eagleFly 5s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(255,255,255,.35)) drop-shadow(0 8px 12px rgba(0,0,0,.65))}
 .eagle .wing{transform-box:view-box;animation:flap 1s ease-in-out infinite}
 .eagle .wing-l{transform-origin:112px 52px}
 .eagle .wing-r{transform-origin:128px 52px;animation-name:flapR}
@@ -117,8 +117,8 @@ body.lock{overflow:hidden}
 
 /* HERO */
 .hero{
-  position:relative;height:calc(100vh - var(--ann-h));min-height:640px;
-  display:flex;align-items:flex-end;color:#fff;
+  position:relative;min-height:max(640px,calc(100vh - var(--ann-h)));padding-top:100px;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff;
   background:
     linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.25) 50%,rgba(0,0,0,0) 68%),
     linear-gradient(0deg,rgba(11,11,12,.9) 0%,rgba(11,11,12,0) 38%),
@@ -274,7 +274,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   body.menu-open .site-header{color:var(--text)}
   .theme-label{display:none}
   .theme-btn{width:38px;padding:0;justify-content:center;margin-right:2px}
-  .hero-brand{top:92px}
+  .hero-brand{position:absolute;left:4%;top:92px;margin:0}
   /* الموبايل: الصورة كاملة فوق (من غير قص)، والكلام تحتها على خلفية غامقة */
   .hero{
     height:auto;min-height:0;flex-direction:column;justify-content:flex-end;
@@ -367,26 +367,51 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 <section class="hero" id="top">
   <div class="hero-brand">
     <div class="hero-logo" data-text="VOLT." aria-label="VOLT">VOLT.</div>
-    <svg class="eagle" viewBox="0 0 200 84" aria-hidden="true">
+    <svg class="eagle" viewBox="0 0 240 130" aria-hidden="true">
       <defs>
-        <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffffff"/>
-          <stop offset="1" stop-color="#9ec9ff"/>
-        </linearGradient>
-        <path id="wingShape" d="M96 38 C72 20 42 17 6 30 L19 32 L5 39 L20 41 L11 49 L30 46 L25 55 C52 51 78 51 96 46 Z"/>
+        <linearGradient id="wingG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4c33"/><stop offset="1" stop-color="#27180e"/></linearGradient>
+        <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e4029"/><stop offset="1" stop-color="#25160c"/></linearGradient>
+        <linearGradient id="whiteG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdd4db"/></linearGradient>
+        <g id="wingL">
+          <path d="M112 52 C98 32 66 18 26 24 L3 38 L24 38 L6 52 L28 49 L14 66 L38 58 L28 76 L54 63 L50 80 L76 65 L76 78 L100 66 L112 70 Z" fill="url(#wingG)" stroke="#140b05" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M108 56 L26 30 M108 58 L10 50 M106 62 L22 64 M106 64 L34 74 M104 66 L54 78" stroke="#140b05" stroke-opacity=".55" stroke-width="1" fill="none"/>
+          <path d="M98 50 q-6 6 -14 4 M86 44 q-6 6 -14 4 M72 40 q-6 6 -14 3" stroke="#140b05" stroke-opacity=".4" stroke-width="1" fill="none"/>
+          <path d="M112 52 C98 32 66 18 26 24" stroke="#b08457" stroke-width="2" fill="none" opacity=".85"/>
+        </g>
       </defs>
-      <!-- الجناح الشمال -->
-      <g class="wing wing-l"><use href="#wingShape" fill="url(#eg)"/></g>
-      <!-- الجناح اليمين (مقلوب) -->
-      <g class="wing wing-r"><g transform="translate(200 0) scale(-1 1)"><use href="#wingShape" fill="url(#eg)"/></g></g>
-      <!-- الذيل -->
-      <path d="M92 54 L89 76 L100 70 L111 76 L108 54 Z" fill="url(#eg)"/>
-      <!-- الجسم -->
-      <ellipse cx="100" cy="42" rx="7.5" ry="15" fill="url(#eg)"/>
-      <!-- الراس والمنقار -->
-      <circle cx="100" cy="25" r="5.6" fill="#fff"/>
-      <path d="M96.6 28 L100 35 L103.4 28 Z" fill="#ffb300"/>
-      <circle cx="98.2" cy="24.2" r="1" fill="#0b0b0c"/><circle cx="101.8" cy="24.2" r="1" fill="#0b0b0c"/>
+
+      <!-- الجناحين -->
+      <g class="wing wing-l"><use href="#wingL"/></g>
+      <g class="wing wing-r"><g transform="translate(240 0) scale(-1 1)"><use href="#wingL"/></g></g>
+
+      <!-- الذيل الأبيض -->
+      <path d="M106 94 L100 122 L113 114 L120 126 L127 114 L140 122 L134 94 Z" fill="url(#whiteG)" stroke="#9aa3ab" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M113 100 L111 116 M120 100 V122 M127 100 L129 116" stroke="#9aa3ab" stroke-width=".7" fill="none"/>
+
+      <!-- الصدر -->
+      <path d="M104 48 C100 70 104 92 120 96 C136 92 140 70 136 48 Z" fill="url(#bodyG)" stroke="#140b05" stroke-width="1.2"/>
+      <path d="M108 62 q6 6 12 0 q6 6 12 0 M110 74 q5 6 10 0 q5 6 10 0 M112 86 q4 5 8 0 q4 5 8 0" stroke="#140b05" stroke-opacity=".45" stroke-width="1" fill="none"/>
+
+      <!-- المخالب -->
+      <g stroke="#f2b705" stroke-linecap="round" fill="none">
+        <path d="M111 90 L108 102 M129 90 L132 102" stroke-width="4"/>
+        <path d="M108 102 L102 110 M108 102 L108 112 M108 102 L114 110 M132 102 L138 110 M132 102 L132 112 M132 102 L126 110" stroke-width="2.5"/>
+      </g>
+
+      <!-- الراس الأبيض -->
+      <path d="M102 46 C100 34 106 22 120 22 C134 22 140 34 138 46 C132 52 108 52 102 46 Z" fill="url(#whiteG)" stroke="#9aa3ab" stroke-width=".8"/>
+      <path d="M106 44 l2 6 M112 47 l1 6 M128 47 l-1 6 M134 44 l-2 6" stroke="#9aa3ab" stroke-width=".8" fill="none"/>
+
+      <!-- العيون الغاضبة -->
+      <ellipse cx="111" cy="40.5" rx="4.2" ry="2.8" fill="#ffd21a"/><circle cx="111.6" cy="40.6" r="1.7" fill="#000"/>
+      <ellipse cx="129" cy="40.5" rx="4.2" ry="2.8" fill="#ffd21a"/><circle cx="128.4" cy="40.6" r="1.7" fill="#000"/>
+      <path d="M105 31 L118 39.5 M135 31 L122 39.5" stroke="#3a2a1c" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+
+      <!-- المنقار المعقوف -->
+      <path d="M112 42 L128 42 C130 55 126 65 120 71 C114 65 110 55 112 42 Z" fill="#f2b705" stroke="#8a6500" stroke-width=".8" stroke-linejoin="round"/>
+      <path d="M120 71 C123 67 125 63 126 58 L120 62 Z" fill="#c88f00"/>
+      <ellipse cx="116" cy="49" rx="1.2" ry="2" fill="#7a5200"/><ellipse cx="124" cy="49" rx="1.2" ry="2" fill="#7a5200"/>
+      <path d="M114.5 59 Q120 62 125.5 59" stroke="#7a5200" stroke-width=".9" fill="none"/>
     </svg>
   </div>
   <div class="hero-content">
@@ -500,8 +525,8 @@ const INSTAGRAM_USER = "volt.eg";
 document.getElementById("waFloat").href = `https://wa.me/${WHATSAPP_NUMBER}`;
 document.getElementById("igFloat").href = `https://instagram.com/${INSTAGRAM_USER}`;
 
-/* ====== صورة البانر: حط هنا الرابط المباشر للصورة (اللي بيبدأ بـ https://i.ibb.co/ وبينتهي بـ .jpg أو .png) ====== */
-const BANNER_URL = "https://cdn.phototourl.com/member/2026-10-30-101b87cf-f356-4c88-930e-170221bfa06c.jpg";
+/* ====== صورة البانر: حط هنا الرابط المباشر للصورة (بينتهي بـ .jpg أو .png) ====== */
+const BANNER_URL = "https://cdn.imagetourls.com/uploads/tyImg/HClrylsg.jpg";
 
 /* بيطبق الصورة على البانر + بيحسب نسبتها عشان تظهر كاملة على الموبايل */
 (function(){
