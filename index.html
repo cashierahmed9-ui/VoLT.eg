@@ -156,6 +156,10 @@ body.lock{overflow:hidden}
 .feature b{display:block;font-size:12px;letter-spacing:2px;margin-bottom:4px}
 .feature span{font-size:12px;color:var(--muted)}
 
+/* VIDEO BANNER */
+.video-banner{width:100%;background:#000;line-height:0;border-bottom:1px solid var(--line)}
+.video-banner video{width:100%;height:auto;display:block;max-height:80vh;object-fit:cover}
+
 /* ================= SHOP ================= */
 #shop{background:var(--bg);color:var(--text);padding-bottom:30px;transition:background .3s,color .3s}
 .section-head{text-align:center;padding:90px 4% 34px}
@@ -519,6 +523,13 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>
     <div><b>PREMIUM QUALITY</b><span>Heavy fabric. Built to last</span></div>
   </div>
+</section>
+
+<!-- VIDEO BANNER -->
+<section class="video-banner" aria-label="Banner">
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="https://www.image2url.com/r2/default/videos/1793549181395-514cf9f4-28ab-45be-8c74-f1e7aa873103.mp4" type="video/mp4">
+  </video>
 </section>
 
 <!-- SHOP -->
@@ -1616,4 +1627,3 @@ hero.insertAdjacentHTML("beforeend",`
 </svg>`);
 })();
 </script>
-
