@@ -285,6 +285,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 #gameCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
 .g-hud{position:absolute;top:0;left:0;right:0;padding:14px 14px 0;display:flex;align-items:flex-start;gap:12px;z-index:3;pointer-events:none}
 .g-coins{display:flex;align-items:center;gap:8px;font-weight:900;font-size:20px;letter-spacing:1px;min-width:84px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.g-coins small{font-size:10px;letter-spacing:1.5px;color:#b5b5bd;font-weight:800;margin-left:2px}
 .coin-ico{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff2a8,#ffd21a 55%,#b8860b);box-shadow:0 0 10px rgba(255,210,26,.6);display:inline-block;flex-shrink:0}
 .g-prog{flex:1;padding-top:5px}
 .g-bar{position:relative;height:10px;border-radius:5px;background:rgba(255,255,255,.18)}
@@ -546,7 +547,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   <div>
     <small>VOLT RUN</small>
     <h3>FLY. COLLECT.<br>WIN A DISCOUNT.</h3>
-    <p>Guide the eagle, grab the coins, dodge the barriers. 500 coins = VOLT500. 1000 coins = VOLT1000.</p>
+    <p>Guide the eagle, grab the coins, dodge the barriers. Hit the target score to unlock a secret discount code. The faster you go, the harder it gets.</p>
   </div>
   <button class="btn" id="playBtn2">PLAY NOW</button>
 </section>
@@ -608,7 +609,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     <canvas id="gameCanvas"></canvas>
 
     <div class="g-hud">
-      <div class="g-coins"><i class="coin-ico"></i><b id="gCoins">0</b></div>
+      <div class="g-coins"><i class="coin-ico"></i><b id="gCoins">0</b><small id="gLvl">LV 1</small></div>
       <div class="g-prog">
         <div class="g-bar">
           <span id="gFill"></span>
@@ -657,16 +658,19 @@ const WHATSAPP_NUMBER = "201000000000";
 /* ====== يوزر الانستجرام (من غير @) ====== */
 const INSTAGRAM_USER = "volt.eg";
 
-/* ====== أكواد الخصم: غيّر النسبة من هنا (pct = نسبة الخصم %) ====== */
-const PROMOS = {
-  VOLT500:  { pct: 10 },
-  VOLT1000: { pct: 20 }
-};
-/* ====== اللعبة: كل كوينة بتجيب كام نقطة + الأهداف والأكواد ====== */
+/* ====== أكواد الخصم (متخزنة مشفرة base64 عشان متبانش في الصفحة قبل ما العميل يكسبها) ======
+   pct = نسبة الخصم %. لتغيير الكود: btoa("الكود_الجديد") في الكونسول وحط الناتج مكان القديم.
+   الحالي: Vk9MVDUwMA== = كود الـ 500 كوينز، Vk9MVDEwMDA= = كود الـ 1000 كوينز */
+const CODE_500  = atob("Vk9MVDUwMA==");
+const CODE_1000 = atob("Vk9MVDEwMDA=");
+const PROMOS = {};
+PROMOS[CODE_500]  = { pct: 10 };
+PROMOS[CODE_1000] = { pct: 20 };
+/* ====== اللعبة: كل كوينة بتجيب كام نقطة + الأهداف ====== */
 const COIN_VALUE = 5;
 const GAME_TARGETS = [
-  { coins: 500,  code: "VOLT500"  },
-  { coins: 1000, code: "VOLT1000" }
+  { coins: 500,  code: CODE_500  },
+  { coins: 1000, code: CODE_1000 }
 ];
 
 document.getElementById("waFloat").href = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -1057,7 +1061,8 @@ function toast(t){
 /* =====================================================================
    VOLT RUN — لعبة النسر (نفس فكرة Subway Surfers)
    3 حارات: يمين/شمال، فوق = طيران لفوق، تحت = غطس.
-   كل كوينة = COIN_VALUE نقطة. 500 = VOLT500 / 1000 = VOLT1000
+   كل كوينة = COIN_VALUE نقطة. الأهداف والأكواد في GAME_TARGETS فوق.
+   الصعوبة بتزيد مع عدد الكوينز: السرعة + كثافة العقبات + أنماط أصعب
    ===================================================================== */
 const gModal = $("#gameModal"), gBox = $("#gameBox"), cv = $("#gameCanvas"), ctx = cv.getContext("2d");
 const F = 420, SPAWN_Z = 2800;
@@ -1079,7 +1084,11 @@ function codesHTML(fresh){
 }
 function rewardsHTML(){
   const u = getUnlocked();
-  return GAME_TARGETS.map(t => `<div class="g-reward${u.includes(t.code) ? " got" : ""}"><span>${t.coins} COINS</span><b>${t.code}</b><span>${PROMOS[t.code].pct}% OFF</span></div>`).join("");
+  /* الكود مبيظهرش غير بعد ما العميل يكسبه */
+  return GAME_TARGETS.map(t => {
+    const got = u.includes(t.code);
+    return `<div class="g-reward${got ? " got" : ""}"><span>${t.coins} COINS</span><b>${got ? t.code : "🔒 SECRET CODE"}</b><span>${PROMOS[t.code].pct}% OFF</span></div>`;
+  }).join("");
 }
 
 function sizeGame(){
@@ -1097,7 +1106,7 @@ function sizeGame(){
 }
 
 function newGame(state){
-  G = {state, t:0, dist:0, speed:800, coins:0, tl:0, px:0, py:0, vy:0, duck:0, objs:[], next:0, earned:[], dead:0, shake:0, flap:0};
+  G = {state, t:0, dist:0, speed:780, lvl:1, coins:0, tl:0, px:0, py:0, vy:0, duck:0, objs:[], next:0, earned:[], dead:0, shake:0, flap:0};
 }
 
 /* --- التحكم --- */
