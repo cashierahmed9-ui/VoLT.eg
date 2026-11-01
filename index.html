@@ -322,17 +322,17 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .theme-btn{width:38px;padding:0;justify-content:center;margin-right:2px}
   .play-label{display:none}
   .play-btn{width:38px;padding:0;justify-content:center;margin-right:2px}
-  /* الموبايل: الصورة كاملة فوق (من غير قص)، والكلام تحتها على خلفية غامقة */
+  /* الموبايل: الفيديو كامل فوق (من غير قص)، والكلام تحته على خلفية غامقة */
   .hero{
-    height:auto;min-height:0;flex-direction:column;justify-content:flex-end;
-    padding-top:var(--hero-h);
+    height:auto;min-height:0;flex-direction:column;justify-content:flex-start;
+    padding-top:0;
     background:#0b0b0c;
   }
   .hero::before{display:none}
-  .hero-video{height:var(--hero-h);object-fit:cover}
+  .hero-video{position:relative;inset:auto;width:100%;height:auto;object-fit:contain;display:block;flex-shrink:0}
   .hero::after{
-    content:"";position:absolute;left:0;right:0;top:0;height:var(--hero-h);pointer-events:none;z-index:1;
-    background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%),linear-gradient(0deg,#0b0b0c 0%,rgba(11,11,12,0) 22%);
+    content:"";position:absolute;left:0;right:0;top:0;height:110px;pointer-events:none;z-index:1;
+    background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 100%);
   }
   .hero-content{position:relative;z-index:2;padding-top:6px;padding-bottom:80px}
   .social-float{right:12px;bottom:12px}
