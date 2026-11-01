@@ -1532,3 +1532,88 @@ updateCart();
 
 </body>
 </html>
+<style>
+.eagle{display:none!important}
+.eagle-real{
+position:absolute;right:4%;bottom:3%;
+width:clamp(300px,44vw,680px);height:auto;
+z-index:2;pointer-events:none;overflow:visible;
+filter:drop-shadow(0 16px 22px rgba(0,0,0,.65));
+animation:eagleGlide 6s ease-in-out infinite;
+}
+.eagle-real .wing{transform-box:view-box;animation:vFlap 1.4s ease-in-out infinite}
+.eagle-real .wing-l{transform-origin:178px 95px}
+.eagle-real .wing-r{transform-origin:222px 95px;animation-name:vFlapR}
+@keyframes vFlap{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(9deg)}}
+@keyframes vFlapR{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-9deg)}}
+@keyframes eagleGlide{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media(max-width:760px){
+.eagle-real{right:50%;transform:translateX(50%);top:calc(var(--hero-h) - 50vw);bottom:auto;width:86vw;animation:none}
+}
+</style>
+
+<script>
+(function(){
+var hero=document.querySelector(".hero");
+if(!hero)return;
+hero.insertAdjacentHTML("beforeend",`
+<svg class="eagle-real" viewBox="0 0 400 270" aria-hidden="true">
+<defs>
+<linearGradient id="vfA" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7a5a3a"/><stop offset=".55" stop-color="#3b2815"/><stop offset="1" stop-color="#150c05"/></linearGradient>
+<linearGradient id="vfB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#b08a5c"/><stop offset=".6" stop-color="#6b4a2e"/><stop offset="1" stop-color="#2a1a0d"/></linearGradient>
+<linearGradient id="vfC" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#d1ac78"/><stop offset="1" stop-color="#7a5434"/></linearGradient>
+<linearGradient id="vBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a5636"/><stop offset="1" stop-color="#241509"/></linearGradient>
+<linearGradient id="vWhite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c3cbd4"/></linearGradient>
+<linearGradient id="vBeak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe066"/><stop offset="1" stop-color="#d49500"/></linearGradient>
+<path id="vf" d="M0 0 C8 -10 10 -48 0 -70 C-10 -48 -8 -10 0 0Z"/>
+<g id="vWing" stroke="#0e0804" stroke-width=".5">
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-152) scale(1.2 1.6)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-143) scale(1.2 1.7)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-134) scale(1.2 1.75)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-125) scale(1.2 1.8)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-116) scale(1.2 1.8)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-107) scale(1.2 1.85)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-100) scale(1.15 2.15)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-93) scale(1.15 2.25)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-86) scale(1.15 2.32)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-79) scale(1.15 2.3)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-72) scale(1.15 2.2)"/>
+<use href="#vf" fill="url(#vfA)" transform="translate(178 95) rotate(-65) scale(1.15 2.05)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-145) scale(1.25 1.2)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-135) scale(1.25 1.25)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-125) scale(1.25 1.3)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-115) scale(1.25 1.3)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-105) scale(1.25 1.3)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-95) scale(1.25 1.3)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-85) scale(1.25 1.25)"/>
+<use href="#vf" fill="url(#vfB)" transform="translate(178 95) rotate(-75) scale(1.25 1.2)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-140) scale(1.1 .8)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-128) scale(1.1 .85)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-116) scale(1.1 .85)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-104) scale(1.1 .85)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-92) scale(1.1 .8)"/>
+<use href="#vf" fill="url(#vfC)" transform="translate(178 95) rotate(-80) scale(1.1 .75)"/>
+<ellipse cx="184" cy="92" rx="20" ry="13" fill="url(#vfB)"/>
+</g>
+</defs>
+<g class="wing wing-l"><use href="#vWing"/></g>
+<g class="wing wing-r"><g transform="translate(400 0) scale(-1 1)"><use href="#vWing"/></g></g>
+<path d="M186 166 L168 258 L185 246 L200 264 L215 246 L232 258 L214 166Z" fill="url(#vWhite)" stroke="#8d97a1" stroke-width="1" stroke-linejoin="round"/>
+<path d="M192 176 L184 248 M200 176 V258 M208 176 L216 248" stroke="#8d97a1" stroke-width=".8" fill="none"/>
+<path d="M178 82 C168 122 176 166 200 180 C224 166 232 122 222 82 Z" fill="url(#vBody)" stroke="#120a04" stroke-width="1"/>
+<path d="M184 104 q8 8 16 0 q8 8 16 0 M186 122 q7 7 14 0 q7 7 14 0 M188 140 q6 6 12 0 q6 6 12 0 M190 156 q5 5 10 0 q5 5 10 0" stroke="#120a04" stroke-opacity=".5" stroke-width="1.1" fill="none"/>
+<path d="M192 168 L190 206 M208 168 L210 206" stroke="#eab308" stroke-width="7" stroke-linecap="round"/>
+<path d="M190 206 l-10 10 M190 206 v12 M190 206 l10 10 M210 206 l-10 10 M210 206 v12 M210 206 l10 10" stroke="#eab308" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+<path d="M179 72 C174 44 186 24 200 24 C214 24 226 44 221 72 C220 84 180 84 179 72 Z" fill="url(#vWhite)" stroke="#8d97a1" stroke-width=".8"/>
+<path d="M184 70 l3 9 M192 76 l2 8 M208 76 l-2 8 M216 70 l-3 9" stroke="#8d97a1" stroke-width=".9" fill="none"/>
+<ellipse cx="190" cy="50" rx="5.4" ry="3.4" fill="#ffd21a"/><circle cx="190.8" cy="50.2" r="2.2" fill="#000"/>
+<ellipse cx="210" cy="50" rx="5.4" ry="3.4" fill="#ffd21a"/><circle cx="209.2" cy="50.2" r="2.2" fill="#000"/>
+<path d="M180 39 L196 49 M220 39 L204 49" stroke="#3a2a1c" stroke-width="4" stroke-linecap="round" fill="none"/>
+<path d="M191 54 L209 54 C213 72 207 88 200 98 C193 88 187 72 191 54 Z" fill="url(#vBeak)" stroke="#8a6500" stroke-width="1" stroke-linejoin="round"/>
+<path d="M200 98 C204 93 207 87 208 80 L200 86 Z" fill="#b57f00"/>
+<ellipse cx="195.5" cy="63" rx="1.4" ry="2.4" fill="#7a5200"/><ellipse cx="204.5" cy="63" rx="1.4" ry="2.4" fill="#7a5200"/>
+<path d="M194 78 Q200 82 206 78" stroke="#7a5200" stroke-width="1" fill="none"/>
+</svg>`);
+})();
+</script>
+
