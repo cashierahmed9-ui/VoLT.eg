@@ -297,6 +297,39 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 .g-panel .btn{margin:0 0 10px;width:100%;justify-content:center;padding:15px 20px}
 .g-keys{font-size:10px;letter-spacing:1.5px;color:#8a8a92;line-height:1.8;margin-top:4px}
 
+/* ===== QUICK VIEW MODAL ===== */
+#qvOverlay{z-index:105}
+.qv{position:fixed;left:50%;top:50%;width:min(860px,94vw);max-height:92vh;overflow:auto;background:var(--bg);color:var(--text);border:1px solid var(--line);z-index:110;display:grid;grid-template-columns:1fr 1fr;opacity:0;pointer-events:none;transform:translate(-50%,-47%) scale(.97);transition:opacity .3s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.qv.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.qv-close{position:absolute;top:10px;right:10px;z-index:5;width:36px;height:36px;border-radius:50%;border:0;background:var(--hdr);color:var(--text);font-size:15px}
+.qv-close:hover{background:var(--violet);color:#fff}
+.qv-img{position:relative;background:var(--card);aspect-ratio:3/4;overflow:hidden}
+.qv-img img{width:100%;height:100%;object-fit:cover}
+.qv-img svg{position:absolute;left:50%;top:50%;width:90%;height:auto;transform:translate(-50%,-50%);filter:drop-shadow(0 14px 10px rgba(0,0,0,.2))}
+.qv-body{padding:36px 30px;display:flex;flex-direction:column;gap:8px}
+.qv-body h3{font-size:20px;letter-spacing:1.5px;font-weight:800;padding-right:30px}
+.qv-body .pricing{font-size:16px}
+.qv-label{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--muted);margin:16px 0 8px;display:flex;gap:8px}
+.qv-label b{color:var(--text)}
+.qv-colors{display:flex;gap:10px}
+.qv-colors button{width:26px;height:26px;border-radius:50%;border:1px solid rgba(128,128,128,.55);padding:0;transition:transform .2s}
+.qv-colors button:hover{transform:scale(1.12)}
+.qv-colors button.sel{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--text)}
+.qv-sizes{display:flex;gap:8px;flex-wrap:wrap}
+.qv-sizes button{min-width:48px;height:42px;padding:0 14px;background:transparent;color:var(--text);border:1px solid var(--line);font-size:12px;font-weight:700;transition:.2s}
+.qv-sizes button:hover{border-color:var(--text)}
+.qv-sizes button.sel{background:var(--text);color:var(--bg);border-color:var(--text)}
+.qv-qty{display:inline-flex;border:1px solid var(--line);width:max-content}
+.qv-qty button{width:40px;height:40px;background:none;border:0;color:var(--text);font-size:18px}
+.qv-qty span{width:44px;display:grid;place-items:center;font-size:14px;font-weight:700}
+.qv-total{display:flex;justify-content:space-between;font-weight:800;letter-spacing:1.5px;font-size:14px;margin:20px 0 4px}
+.qv-btn{width:100%;height:50px;border:1px solid var(--text);font-size:12px;font-weight:800;letter-spacing:2px;transition:.25s}
+.qv-btn.main{background:var(--text);color:var(--bg);margin-top:10px}
+.qv-btn.main:hover{background:#25D366;border-color:#25D366;color:#fff}
+.qv-btn.alt{background:transparent;color:var(--text);margin-top:8px}
+.qv-btn.alt:hover{background:var(--violet);border-color:var(--violet);color:#fff}
+.product .media,.product .info h3{cursor:pointer}
+
 /* RESPONSIVE */
 @media(max-width:1280px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:960px){
@@ -344,6 +377,12 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .cname{display:none}
   .quick{padding:8px}
   .cta{padding:44px 6%}
+}
+@media(max-width:700px){
+  .qv{grid-template-columns:1fr;top:auto;bottom:0;width:100vw;max-height:92vh;transform:translate(-50%,100%)}
+  .qv.open{transform:translate(-50%,0)}
+  .qv-img{aspect-ratio:1/1;max-height:38vh}
+  .qv-body{padding:22px 20px 26px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -531,6 +570,14 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     <button class="checkout" id="checkout">ORDER VIA WHATSAPP</button>
   </div>
 </aside>
+
+<!-- QUICK VIEW -->
+<div class="overlay" id="qvOverlay"></div>
+<div class="qv" id="qv" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="qv-close" id="qvClose" aria-label="Close">✕</button>
+  <div class="qv-img" id="qvImg"></div>
+  <div class="qv-body" id="qvBody"></div>
+</div>
 
 <div class="toast" id="toast">ADDED TO CART</div>
 
@@ -816,7 +863,8 @@ grid.addEventListener("click", e => {
     card.querySelectorAll("[data-size]").forEach(b => b.classList.toggle("sel", b === sizeBtn));
     return;
   }
-  if(e.target.closest("[data-add]")) addToCart(p.id);
+  if(e.target.closest("[data-add]")){ addToCart(p.id); return; }
+  if(!p.soldout) openQuick(p.id);
 });
 
 /* ---------- السلة ---------- */
@@ -1443,6 +1491,78 @@ cv.addEventListener("pointermove", e => {
 });
 cv.addEventListener("pointerup", () => { if(sw && !sw.moved) jump(); sw = null; });
 ["pointercancel","pointerleave"].forEach(ev => cv.addEventListener(ev, () => { sw = null; }));
+
+/* ---------- QUICK VIEW ---------- */
+let qvId = null, qvQty = 1;
+const qvEl = $("#qv"), qvOv = $("#qvOverlay");
+
+function openQuick(id){
+  qvId = id; qvQty = 1; renderQuick();
+  qvEl.classList.add("open"); qvOv.classList.add("open");
+  qvEl.setAttribute("aria-hidden","false");
+  document.body.classList.add("lock");
+}
+function closeQuick(){
+  if(qvId === null) return;
+  qvId = null;
+  qvEl.classList.remove("open"); qvOv.classList.remove("open");
+  qvEl.setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  render();
+}
+function renderQuick(){
+  const p = items.find(x => x.id === qvId), sel = getSel(p), hex = COLORS[sel.color];
+  qvEl.style.setProperty("--c", hex);
+  qvEl.style.setProperty("--ink", ink(hex));
+  $("#qvImg").innerHTML = visual(p, sel.color);
+  const pricing = p.old
+    ? `<div class="pricing"><span>${fmt(p.price)}</span><s>${fmt(p.old)}</s></div>`
+    : `<div class="pricing reg"><span>${fmt(p.price)}</span></div>`;
+  $("#qvBody").innerHTML = `
+    <h3>${p.name}</h3>
+    ${pricing}
+    <div class="qv-label">COLOR: <b>${sel.color}</b></div>
+    <div class="qv-colors">
+      ${p.colors.map(c => `<button class="${c===sel.color?"sel":""}" data-qcolor="${c}" style="background:${COLORS[c]}" title="${c}" aria-label="${c}"></button>`).join("")}
+    </div>
+    <div class="qv-label">SIZE: <b>${sel.size}</b></div>
+    <div class="qv-sizes">
+      ${SIZES[p.category].map(s => `<button class="${s===sel.size?"sel":""}" data-qsize="${s}">${s}</button>`).join("")}
+    </div>
+    <div class="qv-label">QUANTITY</div>
+    <div class="qv-qty">
+      <button data-qminus aria-label="Decrease">−</button><span>${qvQty}</span><button data-qplus aria-label="Increase">+</button>
+    </div>
+    <div class="qv-total"><span>TOTAL</span><span>${fmt(p.price*qvQty)}</span></div>
+    <button class="qv-btn main" data-qorder>ORDER VIA WHATSAPP</button>
+    <button class="qv-btn alt" data-qadd>ADD TO CART</button>`;
+}
+
+qvEl.addEventListener("click", e => {
+  if(qvId === null) return;
+  const p = items.find(x => x.id === qvId), sel = getSel(p);
+  const c = e.target.closest("[data-qcolor]"), s = e.target.closest("[data-qsize]");
+  if(c){ sel.color = c.dataset.qcolor; renderQuick(); return; }
+  if(s){ sel.size = s.dataset.qsize; renderQuick(); return; }
+  if(e.target.closest("[data-qminus]")){ if(qvQty > 1){ qvQty--; renderQuick(); } return; }
+  if(e.target.closest("[data-qplus]")){ if(qvQty < 20){ qvQty++; renderQuick(); } return; }
+  if(e.target.closest("[data-qadd]")){
+    const found = cart.find(i => i.id===p.id && i.size===sel.size && i.color===sel.color);
+    if(found) found.qty += qvQty; else cart.push({id:p.id, color:sel.color, size:sel.size, qty:qvQty});
+    saveCart(); updateCart(); closeQuick(); toast("ADDED TO CART");
+    return;
+  }
+  if(e.target.closest("[data-qorder]")){
+    const sub = p.price*qvQty, pct = promo ? PROMOS[promo].pct : 0, disc = Math.round(sub*pct/100);
+    let msg = `Hello VOLT, I'd like to order:\n• ${p.name} (${sel.color}, ${sel.size}) x${qvQty} = ${fmt(sub)}`;
+    if(promo) msg += `\nDiscount code: ${promo} (${pct}% = -${fmt(disc)})`;
+    msg += `\nTotal: ${fmt(sub-disc)}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  }
+});
+$("#qvClose").addEventListener("click", closeQuick);
+qvOv.addEventListener("click", closeQuick);
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeQuick(); });
 
 render();
 updateCart();
