@@ -98,14 +98,14 @@ body.lock{overflow:hidden}
   display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff;
   background:#0b0b0c;overflow:hidden;
 }
-.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:25% center;z-index:0;opacity:.98}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
 .hero::before{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.28) 34%,rgba(0,0,0,.86) 58%,#050506 100%),
-    linear-gradient(0deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,0) 42%);
+    linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.25) 50%,rgba(0,0,0,0) 68%),
+    linear-gradient(0deg,rgba(11,11,12,.9) 0%,rgba(11,11,12,0) 38%);
 }
-.hero-content{position:relative;z-index:2;padding:0 5% 90px 2%;max-width:58%;margin-left:auto;text-align:right;animation:rise 1s ease both}
+.hero-content{position:relative;z-index:2;padding:0 4% 90px;max-width:720px;animation:rise 1s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:4px;color:#d8d8dc}
 .eyebrow i{width:8px;height:8px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 0 0 rgba(255,59,59,.7);animation:pulse 1.8s infinite}
@@ -116,7 +116,7 @@ body.lock{overflow:hidden}
 .btn:hover{background:transparent;color:#fff}
 .btn.ghost{background:transparent;color:#fff;margin-left:10px}
 .btn.ghost:hover{background:#fff;color:#111}
-.rating{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:34px;font-size:12px;color:#d0d0d5}
+.rating{display:flex;align-items:center;gap:10px;margin-top:34px;font-size:12px;color:#d0d0d5}
 .stars{color:#fff;letter-spacing:3px}
 .scroll-hint{z-index:2;position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:34px;height:34px;display:grid;place-items:center;animation:bounce 2s infinite}
 .scroll-hint svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
@@ -149,40 +149,10 @@ body.lock{overflow:hidden}
 .grid{max-width:1600px;margin:0 auto;padding:0 4% 70px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px 14px}
 .product{min-width:0;--c:#141414;--ink:#fff}
 .media{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--card)}
-.pic{
-  position:absolute;inset:0;perspective:1000px;
-  transition:transform .65s cubic-bezier(.2,.7,.2,1);
-}
-.product:hover .pic{transform:scale(1.035)}
-.pic-face{
-  position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .45s;
-}
-.pic-face img{width:100%;height:100%;object-fit:cover;display:block}
-.pic-face svg{position:absolute;left:50%;top:50%;width:90%;height:auto;transform:translate(-50%,-50%);overflow:visible;filter:drop-shadow(0 14px 10px rgba(0,0,0,.2))}
-.pic-front{transform:rotateY(0)}
-.pic-back{transform:rotateY(-180deg);opacity:0}
-.product:hover .pic.has-back .pic-front{transform:rotateY(180deg);opacity:0}
-.product:hover .pic.has-back .pic-back{transform:rotateY(0);opacity:1}
-.pic-hint{
-  position:absolute;right:10px;bottom:10px;z-index:2;padding:6px 9px;
-  background:rgba(0,0,0,.62);color:#fff;font-size:9px;font-weight:800;
-  letter-spacing:1.5px;opacity:0;transform:translateY(5px);transition:.3s
-}
-.product:hover .pic-hint{opacity:1;transform:none}
-.qv-img{position:relative;background:var(--card);aspect-ratio:3/4;overflow:hidden;display:flex;flex-direction:column;padding:10px;gap:10px}
-.qv-stage{position:relative;flex:1;min-height:0;overflow:hidden;display:grid;place-items:center;background:var(--bg2)}
-.qv-stage img{width:100%;height:100%;object-fit:contain}
-.qv-stage svg{width:90%;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.2))}
-.qv-stage .view-missing{padding:24px;text-align:center;color:var(--muted);font-size:11px;line-height:1.7;letter-spacing:1px}
-.qv-thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;flex:0 0 76px}
-.qv-thumb{position:relative;min-width:0;overflow:hidden;border:1px solid var(--line);background:var(--bg2);padding:0;opacity:.72}
-.qv-thumb.active{border:2px solid var(--violet);opacity:1}
-.qv-thumb img{width:100%;height:100%;object-fit:cover}
-.thumb-placeholder{width:100%;height:100%;display:grid;place-items:center;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px}
-.qv-thumb span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.68);color:#fff;padding:4px 2px;font-size:8px;font-weight:800;letter-spacing:1px}
-
+.pic{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.product:hover .pic{transform:scale(1.045)}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic svg{position:absolute;left:50%;top:50%;width:90%;height:auto;transform:translate(-50%,-50%);overflow:visible;filter:drop-shadow(0 14px 10px rgba(0,0,0,.2))}
 .badge{position:absolute;top:12px;left:12px;z-index:3;background:#000;color:#fff;padding:8px 11px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 .badge.sale{background:#3b3b3f}
 .product.soldout .pic{opacity:.5;filter:grayscale(.5)}
@@ -393,7 +363,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     background:#0b0b0c;
   }
   .hero::before{display:none}
-  .hero-photo{object-position:30% center}
+  .hero-video{position:relative;inset:auto;width:100%;height:auto;object-fit:contain;display:block;flex-shrink:0}
   .hero::after{
     content:"";position:absolute;left:0;right:0;top:0;height:110px;pointer-events:none;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 100%);
@@ -404,162 +374,39 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .btn{padding:15px 26px}
   .toolbar{flex-direction:column;align-items:stretch}
   .search input{width:100%}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 9px;padding-left:12px;padding-right:12px}
-  .media{aspect-ratio:3/4}
-  .info h3{font-size:11px;line-height:1.35}
-  .swatches{gap:6px;flex-wrap:wrap}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}
   .cname{display:none}
   .quick{padding:8px}
   .cta{padding:44px 6%}
 }
 @media(max-width:700px){
-  /* Mobile product details: stable bottom sheet with its own scrolling area */
+  /* شيت بيطلع من تحت: الصورة ثابتة فوق، الاختيارات بتتسكرول، والأزرار ثابتة تحت */
   .qv{
     display:flex;flex-direction:column;overflow:hidden;
     left:0;right:0;top:auto;bottom:0;width:100%;
-    height:auto;max-height:94vh;max-height:94dvh;
+    max-height:90vh;max-height:90dvh;
     border-width:1px 0 0;border-radius:18px 18px 0 0;
     transform:translateY(100%);
-    padding-bottom:env(safe-area-inset-bottom);
   }
-  .qv.open{transform:translateY(0)}
-  .qv-close{top:10px;right:12px;background:rgba(0,0,0,.68);color:#fff;width:40px;height:40px}
-  .qv-img{
-    flex:0 0 auto;aspect-ratio:auto;height:clamp(205px,32dvh,300px);
-    min-height:205px;padding:8px;gap:7px;
-  }
-  .qv-stage{min-height:0}
-  .qv-stage img{object-fit:contain;object-position:center}
-  .qv-stage svg{width:auto;height:86%;max-width:90%}
-  .qv-thumbs{flex:0 0 56px;gap:6px}
-  .qv-thumb span{font-size:8px;padding:4px 1px}
-  .qv-body{
-    flex:1 1 auto;min-height:0;padding:14px 16px 0;gap:3px;
-    overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
-  }
-  .qv-body h3{font-size:16px;padding-right:42px;line-height:1.3}
+  .qv.open{transform:none}
+  .qv-close{top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff}
+  .qv-img{flex:0 0 auto;aspect-ratio:auto;height:30vh;height:30dvh;min-height:170px}
+  .qv-img img{object-position:center top}
+  .qv-img svg{width:auto;height:92%}
+  .qv-body{flex:1 1 auto;min-height:0;padding:16px 18px 0;gap:2px;overflow:hidden}
+  .qv-body h3{font-size:16px;padding-right:0}
   .qv-body .pricing{font-size:14px}
-  .qv-opts{flex:0 0 auto;min-height:0;overflow:visible;padding-bottom:8px}
-  .qv-label{margin:11px 0 7px}
-  .qv-colors button{width:28px;height:28px}
-  .qv-sizes{gap:7px}
-  .qv-sizes button{height:42px;min-width:46px}
-  .qv-qty button{height:40px}
-  .qv-foot{
-    position:sticky;bottom:0;flex:0 0 auto;background:var(--bg);
-    border-top:1px solid var(--line);margin:8px -16px 0;padding:9px 16px 12px;
-    padding-bottom:calc(12px + env(safe-area-inset-bottom));
-  }
-  .qv-total{margin:3px 0 2px}
+  .qv-opts{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .qv-label{margin:12px 0 7px}
+  .qv-sizes button{height:40px;min-width:46px}
+  .qv-qty button{height:38px}
+  .qv-foot{flex:0 0 auto;background:var(--bg);border-top:1px solid var(--line);margin-top:8px;padding:8px 0 calc(14px + env(safe-area-inset-bottom))}
+  .qv-total{margin:6px 0 2px}
   .qv-btn{height:46px}
   .qv-btn.main{margin-top:8px}
   .qv-btn.alt{margin-top:6px}
 }
-
-/* Touch screens don't have hover: keep cards clean and make tap targets comfortable */
-@media(hover:none){
-  .product:hover .pic{transform:none}
-  .product:hover .pic.has-back .pic-front{transform:rotateY(0);opacity:1}
-  .product:hover .pic.has-back .pic-back{transform:rotateY(-180deg);opacity:0}
-  .product:hover .pic-hint{opacity:0}
-  .quick{transform:none;backdrop-filter:blur(8px)}
-  .quick .sizes button{min-width:34px;height:32px}
-  .quick .add{height:38px}
-}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* VOLT SHOPIFY-INSPIRED REDESIGN */
-.site-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 4%;}
-.site-header .left{min-width:0}
-.header-brand{grid-column:2;grid-row:1;font-size:36px;font-weight:1000;letter-spacing:8px;text-align:center;background:linear-gradient(90deg,#168bff,#9b45ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(120,50,255,.24);}
-.site-header .actions{grid-column:3;grid-row:1}
-.hero{min-height:min(760px,calc(100vh - var(--ann-h)));height:690px;justify-content:center;align-items:flex-start;padding-top:90px}
-.hero-photo{object-position:70% 38%;}
-.hero::before{background:linear-gradient(90deg,rgba(4,4,8,.82) 0%,rgba(4,4,8,.55) 38%,rgba(4,4,8,.08) 72%,rgba(4,4,8,.28) 100%),linear-gradient(0deg,rgba(0,0,0,.48),transparent 40%);}
-.hero-content{margin:0 auto 0 0;max-width:55%;padding:0 0 40px 10%;text-align:left;animation:rise 1s ease both}
-.eyebrow{letter-spacing:5px}
-.hero h1{font-size:clamp(52px,7.2vw,100px);letter-spacing:-2px}
-.rating{justify-content:flex-start}
-.features{grid-template-columns:repeat(4,1fr);background:#0a0a0c;color:#fff;border-top:1px solid #29292f;border-bottom:1px solid #29292f}
-.feature{border-right:1px solid #29292f;border-bottom:0;padding:24px 3%;}
-.feature span{color:#aaa}
-#shop{background:#070708;color:#fff;padding-bottom:65px}
-.section-head{padding:62px 4% 30px}
-.section-head h2{letter-spacing:6px;font-size:clamp(28px,3.5vw,42px)}
-.section-head h2:after{content:"";display:block;width:120px;height:3px;margin:15px auto 0;background:linear-gradient(90deg,#168bff,#9b45ff)}
-.toolbar{max-width:1450px}
-.filters button{color:#eee;border-color:#38383e}
-.filters button.active{background:linear-gradient(90deg,#168bff,#9b45ff);border-color:transparent;color:#fff}
-.search input{background:#151519;color:#fff;border-color:#38383e}
-.grid{max-width:1450px;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-bottom:35px}
-.product .media{border:1px solid #303036;border-radius:10px;overflow:hidden;background:#141418}
-.product .info{color:#fff;padding:14px 4px 0}
-.badge.sale{background:linear-gradient(90deg,#168bff,#9b45ff);border-radius:18px}
-.quick{background:rgba(8,8,10,.9)}
-.sizes button{color:#ddd;border-color:#555}
-.add{background:linear-gradient(90deg,#168bff,#9b45ff);color:#fff;border:0}
-.cta{border-radius:10px}
-@media(max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.features{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){
- .site-header{display:flex;justify-content:space-between;padding:12px 3%}
- .header-brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:27px;letter-spacing:5px}
- .site-header .left{width:auto}
- .site-header .actions{margin-left:auto}
- .hero{height:auto;min-height:650px;justify-content:flex-end;padding-top:0}
- .hero-photo{object-position:64% center}
- .hero::before{display:block;background:linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.48) 48%,rgba(0,0,0,.08) 100%)}
- .hero-content{max-width:100%;width:100%;padding:0 7% 76px;text-align:left;margin:0}
- .hero h1{font-size:clamp(48px,13vw,76px)}
- .hero p.sub{font-size:10px;letter-spacing:2px;line-height:1.7}
- .rating{justify-content:flex-start}
- .features{grid-template-columns:repeat(2,1fr)}
- .feature{padding:16px 5%;gap:10px}
- .feature b{font-size:10px}.feature span{font-size:10px}
- .section-head{padding:46px 4% 24px}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 10px}
-}
-
-
-/* MOBILE FINISH: show the complete campaign banner and larger product cards */
-@media(max-width:760px){
-  .hero{
-    display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
-    height:auto;min-height:0;aspect-ratio:auto;padding:0;overflow:hidden;
-    background:#08080a;
-  }
-  .hero-photo{
-    position:relative;inset:auto;display:block;width:100%;height:auto;
-    aspect-ratio:715 / 410;object-fit:contain;object-position:center;
-    opacity:1;
-  }
-  .hero::before,.hero::after{display:none}
-  .hero-content{
-    position:relative;inset:auto;width:100%;max-width:none;margin:0;
-    padding:22px 6% 30px;text-align:center;
-  }
-  .hero h1{font-size:clamp(38px,10vw,58px);line-height:.98;margin:10px 0}
-  .hero p.sub{font-size:9px;letter-spacing:1.5px;margin:0 0 16px}
-  .hero .eyebrow{font-size:9px;letter-spacing:2px}
-  .hero .rating{justify-content:center;margin-top:14px}
-  .hero .scroll-hint{display:none}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 9px;padding-left:9px;padding-right:9px}
-  .product{min-width:0}
-  .product .media{aspect-ratio:1.12 / 1;border-radius:9px}
-  .product .pic-face img{object-fit:contain;object-position:center;background:#141418}
-  .product .info{padding:10px 3px 0}
-  .product .info h3{font-size:11px;line-height:1.3;min-height:29px}
-  .product .pricing{font-size:12px;gap:6px;flex-wrap:wrap}
-  .product .swatches{gap:5px;margin-top:7px}
-  .product .swatches button{width:13px;height:13px}
-  .quick{padding:7px}
-  .quick .sizes button{min-width:29px;height:30px;font-size:10px}
-  .quick .add{height:34px;font-size:9px;letter-spacing:1px}
-}
-@media(max-width:380px){
-  .grid{gap:15px 7px;padding-left:7px;padding-right:7px}
-  .product .media{aspect-ratio:1.06 / 1}
-  .product .info h3{font-size:10px}
-}
 </style>
 </head>
 
@@ -611,7 +458,6 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     </nav>
   </div>
 
-  <a class="header-brand" href="#top" aria-label="VOLT home">VOLT.</a>
   <div class="actions">
     <button class="play-btn" id="playBtn" aria-label="Play VOLT Run and win a discount code">
       <svg viewBox="0 0 24 24"><path d="M6.5 8h11a4.5 4.5 0 0 1 4.4 5.4l-.6 3a2.6 2.6 0 0 1-4.5 1.1L15 15.5H9l-1.8 2a2.6 2.6 0 0 1-4.5-1.1l-.6-3A4.5 4.5 0 0 1 6.5 8z"/><path d="M8 10.5v3M6.5 12h3"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17.5" cy="13" r=".6"/></svg>
@@ -634,10 +480,12 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <img class="hero-photo" src="volt-assets/volt-hero.jpg" alt="VOLT streetwear campaign model wearing branded black oversized tee">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="https://www.image2url.com/r2/default/videos/1793551136184-6271e667-3511-4df8-b44f-8bbb3297a37d.mp4" type="video/mp4">
+  </video>
   <div class="hero-content">
     <div class="eyebrow"><i></i>LIVE NOW / NEW COLLECTION</div>
-    <h1>OWN YOUR<br><span style="background:linear-gradient(90deg,#168bff,#9b45ff);-webkit-background-clip:text;background-clip:text;color:transparent">STYLE.</span></h1>
+    <h1>OWN YOUR<br>STYLE.</h1>
     <p class="sub">EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
     <a href="#shop" class="btn">SHOP NOW</a><a href="#offer" class="btn ghost">BUY 1 GET 2</a>
     <div class="rating"><span class="stars">★★★★★</span><span>Loved by our customers</span></div>
@@ -651,23 +499,23 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 <section class="features">
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-    <div><b>FREE SHIPPING</b><span>OVER 999 EGP</span></div>
+    <div><b>FREE SHIPPING</b><span>On orders over 2000 EGP</span></div>
   </div>
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5"/></svg>
-    <div><b>EASY EXCHANGE</b><span>WITHIN 14 DAYS</span></div>
+    <div><b>EASY EXCHANGE</b><span>Wrong size? We got you</span></div>
   </div>
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>
-    <div><b>24/7 SUPPORT</b><span>WE'RE HERE TO HELP</span></div>
+    <div><b>PREMIUM QUALITY</b><span>Heavy fabric. Built to last</span></div>
   </div>
 </section>
 
 <!-- SHOP -->
 <section id="shop">
   <div class="section-head">
-    <small>NEW DROP</small>
-    <h2>LATEST COLLECTION</h2>
+    <small>SPRING / SUMMER '26</small>
+    <h2>NEW COLLECTION</h2>
   </div>
 
   <div class="toolbar">
@@ -842,15 +690,15 @@ const COLORS = {
   imgs    = صورة لكل لون (لو موجودة بتظهر بدل الرسم)
 */
 const items = [
- {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"], cardImage:"volt-assets/volt-product-1.jpg",
+ {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"],
   imgs:{
     WHITE:"https://cdn.phototourl.com/member/2026-10-30-078b9efc-abc8-43db-9fd8-8624ded0d532.jpg",
     PINK:"https://cdn.phototourl.com/member/2026-10-30-0c76478a-0123-43be-ae44-98134fcddfa3.jpg",
     BLACK:"https://cdn.phototourl.com/member/2026-10-30-6b96d8d7-9af2-45d7-95a7-e8519424fc25.jpg"
   }},
- {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"], cardImage:"volt-assets/volt-product-2.jpg"},
- {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"], cardImage:"volt-assets/volt-product-4.jpg"},
- {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"], cardImage:"volt-assets/volt-product-3.jpg"},
+ {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"]},
+ {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"]},
+ {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"]},
  {id:5,name:"MINIMAL CAP",       price:299,          category:"ACCESSORIES",tag:"",           type:"cap",  deco:"none",   colors:["BLACK","WHITE","NAVY","BEIGE"]},
  {id:6,name:"CLASSIC COTTON TEE",price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"tee",  deco:"pocket", colors:["OLIVE","WHITE","BLACK","GRAY"]},
  {id:7,name:"CASUAL TWO PIECE",  price:1199,         category:"SETS",       tag:"",           type:"set",  deco:"none",   colors:["BEIGE","BLACK","OLIVE"]},
@@ -938,28 +786,8 @@ function visual(p, color){
   if(p.imgs && p.imgs[color]) return `<img src="${p.imgs[color]}" alt="${p.name} - ${color}">`;
   return garment(p);
 }
-
-/* صور زوايا المنتج: views[color] = [front, back, detail] */
-function getViews(p, color){
-  const custom = p.views && p.views[color] ? p.views[color] : [];
-  return [
-    custom[0] || (p.imgs && p.imgs[color]) || p.cardImage || null,
-    custom[1] || null,
-    custom[2] || null
-  ];
-}
-function cardVisual(p, color){
-  const views = getViews(p, color);
-  const front = views[0] ? `<img src="${views[0]}" alt="${p.name} - front">` : garment(p);
-  const back = views[1] ? `<img src="${views[1]}" alt="${p.name} - back">` : "";
-  return `<div class="pic-face pic-front">${front}</div>
-          ${back ? `<div class="pic-face pic-back">${back}</div><span class="pic-hint">BACK VIEW</span>` : ""}`;
-}
-/* تحميل مسبق لكل صور المنتجات والزوايا */
-items.forEach(p => {
-  const urls = [p.cardImage, ...Object.values(p.imgs || {}), ...Object.values(p.views || {}).flat()];
-  urls.filter(Boolean).forEach(u => { const im = new Image(); im.src = u; });
-});
+/* تحميل مسبق للصور عشان التبديل يبقى فوري */
+items.forEach(p => p.imgs && Object.values(p.imgs).forEach(u => { const im = new Image(); im.src = u; }));
 
 /* ---------- الحالة ---------- */
 let category = "ALL";
@@ -1003,7 +831,7 @@ function render(){
     <article class="product${p.soldout?" soldout":""}" data-id="${p.id}" style="--c:${hex};--ink:${ink(hex)}">
       <div class="media">
         ${badge}
-        <div class="pic${getViews(p, sel.color)[1] ? " has-back" : ""}">${cardVisual(p, sel.color)}</div>
+        <div class="pic">${visual(p, sel.color)}</div>
         ${quick}
       </div>
       <div class="info">
@@ -1048,10 +876,7 @@ grid.addEventListener("click", e => {
     card.style.setProperty("--ink", ink(hex));
     card.querySelectorAll("[data-color]").forEach(b => b.classList.toggle("sel", b === colorBtn));
     card.querySelector(".cname").textContent = sel.color;
-    const pic = card.querySelector(".pic");
-    const hasBack = !!getViews(p, sel.color)[1];
-    pic.classList.toggle("has-back", hasBack);
-    pic.innerHTML = cardVisual(p, sel.color);
+    if(p.imgs && p.imgs[sel.color]) card.querySelector(".pic img").src = p.imgs[sel.color];
     return;
   }
   const sizeBtn = e.target.closest("[data-size]");
@@ -1687,11 +1512,11 @@ cv.addEventListener("pointerup", () => { if(sw && !sw.moved) jump(); sw = null; 
 ["pointercancel","pointerleave"].forEach(ev => cv.addEventListener(ev, () => { sw = null; }));
 
 /* ---------- QUICK VIEW ---------- */
-let qvId = null, qvQty = 1, qvView = 0;
+let qvId = null, qvQty = 1;
 const qvEl = $("#qv"), qvOv = $("#qvOverlay");
 
 function openQuick(id){
-  qvId = id; qvQty = 1; qvView = 0; renderQuick();
+  qvId = id; qvQty = 1; renderQuick();
   qvEl.classList.add("open"); qvOv.classList.add("open");
   qvEl.setAttribute("aria-hidden","false");
   document.body.classList.add("lock");
@@ -1706,29 +1531,9 @@ function closeQuick(){
 }
 function renderQuick(){
   const p = items.find(x => x.id === qvId), sel = getSel(p), hex = COLORS[sel.color];
-  const views = getViews(p, sel.color);
-  qvView = Math.max(0, Math.min(2, qvView));
   qvEl.style.setProperty("--c", hex);
   qvEl.style.setProperty("--ink", ink(hex));
-
-  const mainView = views[qvView]
-    ? `<img src="${views[qvView]}" alt="${p.name} - ${["front","back","detail"][qvView]}">`
-    : qvView === 0
-      ? visual(p, sel.color)
-      : `<div class="view-missing">${qvView === 1 ? "BACK VIEW" : "DETAIL VIEW"}<br>ADD THIS PRODUCT PHOTO IN THE PRODUCT DATA</div>`;
-
-  const labels = ["FRONT", "BACK", "DETAIL"];
-  $("#qvImg").innerHTML = `
-    <div class="qv-stage">${mainView}</div>
-    <div class="qv-thumbs">
-      ${labels.map((label,i) => {
-        const thumb = views[i]
-          ? `<img src="${views[i]}" alt="${label}">`
-          : i === 0 ? visual(p, sel.color) : `<div class="thumb-placeholder">${label}</div>`;
-        return `<button class="qv-thumb${i===qvView?" active":""}" data-qview="${i}" aria-label="${label}">${thumb}<span>${label}</span></button>`;
-      }).join("")}
-    </div>`;
-
+  $("#qvImg").innerHTML = visual(p, sel.color);
   const pricing = p.old
     ? `<div class="pricing"><span>${fmt(p.price)}</span><s>${fmt(p.old)}</s></div>`
     : `<div class="pricing reg"><span>${fmt(p.price)}</span></div>`;
@@ -1759,10 +1564,8 @@ function renderQuick(){
 qvEl.addEventListener("click", e => {
   if(qvId === null) return;
   const p = items.find(x => x.id === qvId), sel = getSel(p);
-  const view = e.target.closest("[data-qview]");
   const c = e.target.closest("[data-qcolor]"), s = e.target.closest("[data-qsize]");
-  if(view){ qvView = +view.dataset.qview; renderQuick(); return; }
-  if(c){ sel.color = c.dataset.qcolor; qvView = 0; renderQuick(); return; }
+  if(c){ sel.color = c.dataset.qcolor; renderQuick(); return; }
   if(s){ sel.size = s.dataset.qsize; renderQuick(); return; }
   if(e.target.closest("[data-qminus]")){ if(qvQty > 1){ qvQty--; renderQuick(); } return; }
   if(e.target.closest("[data-qplus]")){ if(qvQty < 20){ qvQty++; renderQuick(); } return; }
@@ -1823,4 +1626,3 @@ updateCart();
 
 </body>
 </html>
-@media(max-width:700px){.hero-content{max-width:100%;margin-left:0;text-align:left;padding:0 5% 54px}.rating{justify-content:flex-start}}
