@@ -519,6 +519,47 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 10px}
 }
 
+
+/* MOBILE FINISH: show the complete campaign banner and larger product cards */
+@media(max-width:760px){
+  .hero{
+    display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+    height:auto;min-height:0;aspect-ratio:auto;padding:0;overflow:hidden;
+    background:#08080a;
+  }
+  .hero-photo{
+    position:relative;inset:auto;display:block;width:100%;height:auto;
+    aspect-ratio:715 / 410;object-fit:contain;object-position:center;
+    opacity:1;
+  }
+  .hero::before,.hero::after{display:none}
+  .hero-content{
+    position:relative;inset:auto;width:100%;max-width:none;margin:0;
+    padding:22px 6% 30px;text-align:center;
+  }
+  .hero h1{font-size:clamp(38px,10vw,58px);line-height:.98;margin:10px 0}
+  .hero p.sub{font-size:9px;letter-spacing:1.5px;margin:0 0 16px}
+  .hero .eyebrow{font-size:9px;letter-spacing:2px}
+  .hero .rating{justify-content:center;margin-top:14px}
+  .hero .scroll-hint{display:none}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 9px;padding-left:9px;padding-right:9px}
+  .product{min-width:0}
+  .product .media{aspect-ratio:1.12 / 1;border-radius:9px}
+  .product .pic-face img{object-fit:contain;object-position:center;background:#141418}
+  .product .info{padding:10px 3px 0}
+  .product .info h3{font-size:11px;line-height:1.3;min-height:29px}
+  .product .pricing{font-size:12px;gap:6px;flex-wrap:wrap}
+  .product .swatches{gap:5px;margin-top:7px}
+  .product .swatches button{width:13px;height:13px}
+  .quick{padding:7px}
+  .quick .sizes button{min-width:29px;height:30px;font-size:10px}
+  .quick .add{height:34px;font-size:9px;letter-spacing:1px}
+}
+@media(max-width:380px){
+  .grid{gap:15px 7px;padding-left:7px;padding-right:7px}
+  .product .media{aspect-ratio:1.06 / 1}
+  .product .info h3{font-size:10px}
+}
 </style>
 </head>
 
@@ -593,7 +634,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <img class="hero-photo" src="volt-hero.jpg" alt="VOLT streetwear campaign model wearing branded black oversized tee">
+  <img class="hero-photo" src="volt-assets/volt-hero.jpg" alt="VOLT streetwear campaign model wearing branded black oversized tee">
   <div class="hero-content">
     <div class="eyebrow"><i></i>LIVE NOW / NEW COLLECTION</div>
     <h1>OWN YOUR<br><span style="background:linear-gradient(90deg,#168bff,#9b45ff);-webkit-background-clip:text;background-clip:text;color:transparent">STYLE.</span></h1>
@@ -801,15 +842,15 @@ const COLORS = {
   imgs    = صورة لكل لون (لو موجودة بتظهر بدل الرسم)
 */
 const items = [
- {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"], cardImage:"volt-product-1.jpg",
+ {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"], cardImage:"volt-assets/volt-product-1.jpg",
   imgs:{
     WHITE:"https://cdn.phototourl.com/member/2026-10-30-078b9efc-abc8-43db-9fd8-8624ded0d532.jpg",
     PINK:"https://cdn.phototourl.com/member/2026-10-30-0c76478a-0123-43be-ae44-98134fcddfa3.jpg",
     BLACK:"https://cdn.phototourl.com/member/2026-10-30-6b96d8d7-9af2-45d7-95a7-e8519424fc25.jpg"
   }},
- {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"], cardImage:"volt-product-2.jpg"},
- {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"], cardImage:"volt-product-4.jpg"},
- {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"], cardImage:"volt-product-3.jpg"},
+ {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"], cardImage:"volt-assets/volt-product-2.jpg"},
+ {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"], cardImage:"volt-assets/volt-product-4.jpg"},
+ {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"], cardImage:"volt-assets/volt-product-3.jpg"},
  {id:5,name:"MINIMAL CAP",       price:299,          category:"ACCESSORIES",tag:"",           type:"cap",  deco:"none",   colors:["BLACK","WHITE","NAVY","BEIGE"]},
  {id:6,name:"CLASSIC COTTON TEE",price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"tee",  deco:"pocket", colors:["OLIVE","WHITE","BLACK","GRAY"]},
  {id:7,name:"CASUAL TWO PIECE",  price:1199,         category:"SETS",       tag:"",           type:"set",  deco:"none",   colors:["BEIGE","BLACK","OLIVE"]},
