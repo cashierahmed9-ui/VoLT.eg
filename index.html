@@ -406,46 +406,6 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .qv-btn.main{margin-top:8px}
   .qv-btn.alt{margin-top:6px}
 }
-/* ===== CHECKOUT (بيانات العميل) ===== */
-#coOverlay{z-index:114}
-.co{position:fixed;left:50%;top:50%;width:min(620px,94vw);max-height:92vh;max-height:92dvh;background:var(--bg);color:var(--text);border:1px solid var(--line);z-index:115;display:flex;flex-direction:column;overflow:hidden;opacity:0;pointer-events:none;transform:translate(-50%,-47%) scale(.97);transition:opacity .3s,transform .35s cubic-bezier(.2,.7,.2,1)}
-.co.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
-.co-head{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 14px 14px 22px;border-bottom:1px solid var(--line);font-size:13px;font-weight:800;letter-spacing:3px}
-.co-close{width:36px;height:36px;border-radius:50%;border:0;background:none;color:var(--text);font-size:15px}
-.co-close:hover{background:rgba(128,128,128,.22)}
-.co-form{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
-.co-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:18px 22px 6px}
-.co-title{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--muted);margin:0 0 10px}
-.co-sum{border:1px solid var(--line);background:var(--bg2);padding:8px 14px;margin-bottom:22px}
-.co-line{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:12px;font-weight:600;letter-spacing:.3px;padding:8px 0;border-bottom:1px solid var(--line)}
-.co-line:last-child{border-bottom:0}
-.co-line small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:3px;letter-spacing:.5px}
-.co-line b{white-space:nowrap}
-.co-line.sub{color:var(--muted);font-weight:500}
-.co-line.disc{color:#22b455;font-weight:700}
-.co-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.co-f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}
-.co-f label{font-size:10.5px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
-.co-f label i{font-style:normal;font-weight:500;letter-spacing:.5px}
-.co-f input,.co-f select,.co-f textarea{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--line);padding:13px 14px;font:inherit;font-size:16px;outline:none;border-radius:0;-webkit-appearance:none;appearance:none;transition:border-color .2s}
-.co-f textarea{resize:none;min-height:74px}
-.co-f select{padding-right:36px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%239a9aa2' stroke-width='1.6'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
-.co-f input:focus,.co-f select:focus,.co-f textarea:focus{border-color:var(--violet)}
-.co-f.bad input,.co-f.bad select,.co-f.bad textarea{border-color:var(--sale)}
-.co-err{font-size:11px;color:var(--sale);letter-spacing:.3px}
-.co-err:empty{display:none}
-.co-foot{flex:0 0 auto;padding:14px 22px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
-.co-tot{display:flex;justify-content:space-between;font-weight:800;font-size:14px;letter-spacing:1.5px;margin-bottom:4px}
-.co-pay{font-size:11px;color:var(--muted);letter-spacing:.4px;margin-bottom:12px}
-.co-submit{width:100%;height:52px;background:#25D366;color:#fff;border:1px solid #25D366;font-size:12px;font-weight:800;letter-spacing:2px;transition:.25s}
-.co-submit:hover{filter:brightness(1.08)}
-@media(max-width:700px){
-  .co{left:0;right:0;top:auto;bottom:0;width:100%;border-width:1px 0 0;border-radius:18px 18px 0 0;transform:translateY(100%)}
-  .co.open{transform:none}
-  .co-scroll{padding:16px 18px 4px}
-  .co-foot{padding:12px 18px calc(14px + env(safe-area-inset-bottom))}
-}
-@media(max-width:420px){.co-row{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -628,7 +588,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     <div class="sum"><span>SUBTOTAL</span><span id="cartSub">0 EGP</span></div>
     <div class="sum disc" id="discRow" hidden><span id="discLabel">DISCOUNT</span><span id="discAmt">-0 EGP</span></div>
     <div class="total"><span>TOTAL</span><span id="cartTotal">0 EGP</span></div>
-    <p class="note">Shipping calculated at order confirmation.</p>
+    <p class="note">Shipping is calculated at checkout based on your governorate.</p>
     <button class="checkout" id="checkout">CHECKOUT</button>
   </div>
 </aside>
@@ -639,67 +599,6 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   <button class="qv-close" id="qvClose" aria-label="Close">✕</button>
   <div class="qv-img" id="qvImg"></div>
   <div class="qv-body" id="qvBody"></div>
-</div>
-
-<!-- CHECKOUT -->
-<div class="overlay" id="coOverlay"></div>
-<div class="co" id="co" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Checkout">
-  <div class="co-head">
-    <span>CHECKOUT</span>
-    <button type="button" class="co-close" id="coClose" aria-label="Close">✕</button>
-  </div>
-  <form class="co-form" id="coForm" novalidate>
-    <div class="co-scroll">
-      <p class="co-title">YOUR ORDER</p>
-      <div class="co-sum" id="coSum"></div>
-
-      <p class="co-title">DELIVERY DETAILS</p>
-      <div class="co-f">
-        <label for="coName">FULL NAME</label>
-        <input id="coName" name="name" type="text" autocomplete="name" placeholder="e.g. Ahmed Mohamed">
-        <span class="co-err"></span>
-      </div>
-      <div class="co-row">
-        <div class="co-f">
-          <label for="coPhone">PHONE NUMBER</label>
-          <input id="coPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX">
-          <span class="co-err"></span>
-        </div>
-        <div class="co-f">
-          <label for="coPhone2">ANOTHER PHONE <i>(optional)</i></label>
-          <input id="coPhone2" name="phone2" type="tel" inputmode="tel" autocomplete="off" placeholder="01XXXXXXXXX">
-          <span class="co-err"></span>
-        </div>
-      </div>
-      <div class="co-row">
-        <div class="co-f">
-          <label for="coGov">GOVERNORATE</label>
-          <select id="coGov" name="gov" autocomplete="address-level1"></select>
-          <span class="co-err"></span>
-        </div>
-        <div class="co-f">
-          <label for="coCity">CITY / AREA</label>
-          <input id="coCity" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Nasr City">
-          <span class="co-err"></span>
-        </div>
-      </div>
-      <div class="co-f">
-        <label for="coAddress">FULL ADDRESS</label>
-        <textarea id="coAddress" name="address" autocomplete="street-address" placeholder="Street, building no., floor, apartment, landmark"></textarea>
-        <span class="co-err"></span>
-      </div>
-      <div class="co-f">
-        <label for="coNotes">NOTES <i>(optional)</i></label>
-        <input id="coNotes" name="notes" type="text" autocomplete="off" placeholder="Anything we should know?">
-        <span class="co-err"></span>
-      </div>
-    </div>
-    <div class="co-foot">
-      <div class="co-tot"><span>TOTAL</span><span id="coTotal">0 EGP</span></div>
-      <p class="co-pay">Payment: cash on delivery. We'll confirm your order on WhatsApp.</p>
-      <button type="submit" class="co-submit">CONFIRM ORDER ON WHATSAPP</button>
-    </div>
-  </form>
 </div>
 
 <div class="toast" id="toast">ADDED TO CART</div>
@@ -1107,7 +1006,7 @@ $("#checkout").addEventListener("click", () => {
     return {id:i.id, color:i.color || p.colors[0], size:i.size, qty:i.qty};
   });
   closeCart();
-  openCheckout(lines, true);
+  goCheckout(lines, true);
 });
 
 /* ---------- NIGHT / LIGHT MODE ---------- */
@@ -1679,135 +1578,47 @@ qvEl.addEventListener("click", e => {
   if(e.target.closest("[data-qorder]")){
     const line = {id:p.id, color:sel.color, size:sel.size, qty:qvQty};
     closeQuick();
-    openCheckout([line], false);
+    goCheckout([line], false);
   }
 });
 $("#qvClose").addEventListener("click", closeQuick);
 qvOv.addEventListener("click", closeQuick);
 document.addEventListener("keydown", e => { if(e.key === "Escape") closeQuick(); });
 
-/* ---------- CHECKOUT: بيانات العميل ثم الإرسال على واتساب ---------- */
-const GOVS = ["Cairo","Giza","Alexandria","Qalyubia","Port Said","Suez","Dakahlia","Sharqia","Gharbia","Monufia","Beheira","Kafr El Sheikh","Damietta","Ismailia","Faiyum","Beni Suef","Minya","Assiut","Sohag","Qena","Luxor","Aswan","Red Sea","New Valley","Matrouh","North Sinai","South Sinai"];
+/* ====== أسعار الشحن حسب المحافظة — بتتحسب في صفحة الشيك أوت. عدّل الأرقام براحتك حسب تعاقدك مع شركة الشحن ====== */
+const SHIPPING = {
+  "Cairo":70, "Giza":70,
+  "Alexandria":90, "Qalyubia":90, "Port Said":90, "Suez":90, "Ismailia":90, "Damietta":90,
+  "Dakahlia":90, "Sharqia":90, "Gharbia":90, "Monufia":90, "Beheira":90, "Kafr El Sheikh":90,
+  "Faiyum":110, "Beni Suef":110, "Minya":110, "Assiut":110, "Sohag":110,
+  "Qena":150, "Luxor":150, "Aswan":150, "Red Sea":150, "Matrouh":150, "North Coast (Sahel)":150,
+  "New Valley":160, "North Sinai":160, "South Sinai":160
+};
+/* الشحن مجاني لو إجمالي المنتجات (بعد الخصم) وصل للرقم ده. حط 0 لو مفيش شحن مجاني */
 const FREE_SHIP_FROM = 2000;
-const coEl = $("#co"), coOv = $("#coOverlay"), coForm = $("#coForm");
-let coOrder = null;
 
-$("#coGov").innerHTML = `<option value="">Select governorate</option>` + GOVS.map(g => `<option value="${g}">${g}</option>`).join("");
-
-const normPhone = s => String(s || "")
-  .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-  .replace(/[^\d+]/g, "")
-  .replace(/^\+?20/, "0")
-  .replace(/^1(?=[0125]\d{8}$)/, "0");
-const okPhone = s => /^01[0125]\d{8}$/.test(s);
-
-function loadCustomer(){
-  try { return JSON.parse(localStorage.getItem("volt-customer") || "{}"); } catch(e){ return {}; }
-}
-function saveCustomer(v){
-  try { localStorage.setItem("volt-customer", JSON.stringify({name:v.name, phone:v.phone, phone2:v.phone2, gov:v.gov, city:v.city, address:v.address})); } catch(e){}
-}
-
-function fieldWrap(el){ return el.closest(".co-f"); }
-function setErr(el, msg){
-  const w = fieldWrap(el);
-  w.classList.toggle("bad", !!msg);
-  w.querySelector(".co-err").textContent = msg || "";
-}
-
-function openCheckout(lines, fromCart){
-  const sub = lines.reduce((a,i) => a + items.find(x => x.id===i.id).price*i.qty, 0);
-  const pct = promo ? PROMOS[promo].pct : 0, disc = Math.round(sub*pct/100);
-  coOrder = {lines, fromCart, sub, pct, disc, total: sub - disc};
-
-  $("#coSum").innerHTML =
-    lines.map(i => {
-      const p = items.find(x => x.id===i.id);
-      return `<div class="co-line"><div>${p.name}<small>${i.color} · SIZE ${i.size} · x${i.qty}</small></div><b>${fmt(p.price*i.qty)}</b></div>`;
-    }).join("") +
-    `<div class="co-line sub"><span>SUBTOTAL</span><b>${fmt(sub)}</b></div>` +
-    (promo ? `<div class="co-line disc"><span>DISCOUNT ${promo} (${pct}%)</span><b>-${fmt(disc)}</b></div>` : "") +
-    `<div class="co-line sub"><span>SHIPPING</span><b>${sub >= FREE_SHIP_FROM ? "FREE" : "CONFIRMED ON WHATSAPP"}</b></div>`;
-  $("#coTotal").textContent = fmt(coOrder.total);
-
-  const c = loadCustomer();
-  coForm.elements.name.value    = c.name || "";
-  coForm.elements.phone.value   = c.phone || "";
-  coForm.elements.phone2.value  = c.phone2 || "";
-  coForm.elements.gov.value     = GOVS.includes(c.gov) ? c.gov : "";
-  coForm.elements.city.value    = c.city || "";
-  coForm.elements.address.value = c.address || "";
-  coForm.elements.notes.value   = "";
-  coForm.querySelectorAll(".co-f").forEach(w => { w.classList.remove("bad"); w.querySelector(".co-err").textContent = ""; });
-  coForm.querySelector(".co-scroll").scrollTop = 0;
-
-  coEl.classList.add("open"); coOv.classList.add("open");
-  coEl.setAttribute("aria-hidden","false");
-  document.body.classList.add("lock");
-}
-function closeCheckout(){
-  if(!coEl.classList.contains("open")) return;
-  coEl.classList.remove("open"); coOv.classList.remove("open");
-  coEl.setAttribute("aria-hidden","true");
-  document.body.classList.remove("lock");
-}
-
-coForm.addEventListener("input", e => { if(e.target.closest(".co-f")) setErr(e.target, ""); });
-coForm.addEventListener("change", e => { if(e.target.closest(".co-f")) setErr(e.target, ""); });
-
-coForm.addEventListener("submit", e => {
-  e.preventDefault();
-  if(!coOrder) return;
-  const f = coForm.elements;
-  const v = {
-    name: f.name.value.trim().replace(/\s+/g," "),
-    phone: normPhone(f.phone.value),
-    phone2: normPhone(f.phone2.value),
-    gov: f.gov.value,
-    city: f.city.value.trim(),
-    address: f.address.value.trim().replace(/\s+/g," "),
-    notes: f.notes.value.trim()
+/* ---------- فتح صفحة الشيك أوت (checkout.html) ---------- */
+function goCheckout(lines, fromCart){
+  const order = {
+    fromCart,
+    lines: lines.map(i => {
+      const p = items.find(x => x.id === i.id);
+      return {name:p.name, price:p.price, color:i.color, size:i.size, qty:i.qty, hex:COLORS[i.color], img:(p.imgs && p.imgs[i.color]) || ""};
+    }),
+    promo: promo ? {code:promo, pct:PROMOS[promo].pct} : null,
+    whatsapp: WHATSAPP_NUMBER,
+    shipping: SHIPPING,
+    freeFrom: FREE_SHIP_FROM
   };
-
-  let first = null;
-  const bad = (el, msg) => { setErr(el, msg); if(!first) first = el; };
-  if(v.name.length < 3)                      bad(f.name, "Please enter your full name.");
-  if(!okPhone(v.phone))                      bad(f.phone, "Enter a valid Egyptian mobile (01XXXXXXXXX).");
-  if(v.phone2 && !okPhone(v.phone2))         bad(f.phone2, "Enter a valid mobile or leave it empty.");
-  if(!v.gov)                                 bad(f.gov, "Select your governorate.");
-  if(v.city.length < 2)                      bad(f.city, "Enter your city or area.");
-  if(v.address.length < 8)                   bad(f.address, "Enter your full address (street, building, floor, apartment).");
-  if(first){ first.focus(); return; }
-
-  const o = coOrder;
-  const lines = o.lines.map(i => {
-    const p = items.find(x => x.id===i.id);
-    return `• ${p.name} (${i.color}, ${i.size}) x${i.qty} = ${fmt(p.price*i.qty)}`;
-  });
-  let msg = `Hello VOLT, I'd like to place an order:\n\n*ORDER*\n${lines.join("\n")}\n\nSubtotal: ${fmt(o.sub)}`;
-  if(promo) msg += `\nDiscount code: ${promo} (${o.pct}% = -${fmt(o.disc)})`;
-  msg += `\nShipping: ${o.sub >= FREE_SHIP_FROM ? "FREE" : "to be confirmed"}`;
-  msg += `\n*Total: ${fmt(o.total)}*`;
-  msg += `\n\n*CUSTOMER*\nName: ${v.name}\nPhone: ${v.phone}`;
-  if(v.phone2) msg += `\nAnother phone: ${v.phone2}`;
-  msg += `\nGovernorate: ${v.gov}\nCity / Area: ${v.city}\nAddress: ${v.address}`;
-  if(v.notes) msg += `\nNotes: ${v.notes}`;
-  msg += `\n\nPayment: Cash on delivery`;
-
-  saveCustomer(v);
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-  const w = window.open(url, "_blank");
-  if(!w){ window.location.href = url; return; }
-
-  if(o.fromCart){ cart = []; saveCart(); updateCart(); }
-  coOrder = null;
-  closeCheckout();
-  toast("ORDER SENT ON WHATSAPP");
+  try { localStorage.setItem("volt-checkout", JSON.stringify(order)); } catch(e){}
+  window.location.href = "checkout.html";
+}
+/* لو العميل رجع بزرار Back والصفحة اتحملت من الكاش، نحدّث السلة */
+window.addEventListener("pageshow", e => {
+  if(!e.persisted) return;
+  try { cart = JSON.parse(localStorage.getItem("volt-cart-v2") || "[]"); } catch(err){ cart = []; }
+  updateCart();
 });
-
-$("#coClose").addEventListener("click", closeCheckout);
-coOv.addEventListener("click", closeCheckout);
-document.addEventListener("keydown", e => { if(e.key === "Escape") closeCheckout(); });
 
 render();
 updateCart();
