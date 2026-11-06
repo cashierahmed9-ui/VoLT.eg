@@ -180,6 +180,7 @@ body.lock{overflow:hidden}
 .qv-thumb{position:relative;min-width:0;overflow:hidden;border:1px solid var(--line);background:var(--bg2);padding:0;opacity:.72}
 .qv-thumb.active{border:2px solid var(--violet);opacity:1}
 .qv-thumb img{width:100%;height:100%;object-fit:cover}
+.thumb-placeholder{width:100%;height:100%;display:grid;place-items:center;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px}
 .qv-thumb span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.68);color:#fff;padding:4px 2px;font-size:8px;font-weight:800;letter-spacing:1px}
 
 .badge{position:absolute;top:12px;left:12px;z-index:3;background:#000;color:#fff;padding:8px 11px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
@@ -403,39 +404,67 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .btn{padding:15px 26px}
   .toolbar{flex-direction:column;align-items:stretch}
   .search input{width:100%}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 9px;padding-left:12px;padding-right:12px}
+  .media{aspect-ratio:3/4}
+  .info h3{font-size:11px;line-height:1.35}
+  .swatches{gap:6px;flex-wrap:wrap}
   .cname{display:none}
   .quick{padding:8px}
   .cta{padding:44px 6%}
 }
 @media(max-width:700px){
-  /* شيت بيطلع من تحت: الصورة ثابتة فوق، الاختيارات بتتسكرول، والأزرار ثابتة تحت */
+  /* Mobile product details: stable bottom sheet with its own scrolling area */
   .qv{
     display:flex;flex-direction:column;overflow:hidden;
     left:0;right:0;top:auto;bottom:0;width:100%;
-    max-height:90vh;max-height:90dvh;
+    height:auto;max-height:94vh;max-height:94dvh;
     border-width:1px 0 0;border-radius:18px 18px 0 0;
     transform:translateY(100%);
+    padding-bottom:env(safe-area-inset-bottom);
   }
-  .qv.open{transform:none}
-  .qv-close{top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff}
-  .qv-img{flex:0 0 auto;aspect-ratio:auto;height:34vh;height:34dvh;min-height:190px;padding:8px;gap:7px}
-  .qv-stage img{object-position:center top}
-  .qv-stage svg{width:auto;height:88%}
-  .qv-thumbs{flex-basis:58px;gap:6px}
-  .qv-thumb span{font-size:7px;padding:3px 1px}
-  .qv-body{flex:1 1 auto;min-height:0;padding:16px 18px 0;gap:2px;overflow:hidden}
-  .qv-body h3{font-size:16px;padding-right:0}
+  .qv.open{transform:translateY(0)}
+  .qv-close{top:10px;right:12px;background:rgba(0,0,0,.68);color:#fff;width:40px;height:40px}
+  .qv-img{
+    flex:0 0 auto;aspect-ratio:auto;height:clamp(205px,32dvh,300px);
+    min-height:205px;padding:8px;gap:7px;
+  }
+  .qv-stage{min-height:0}
+  .qv-stage img{object-fit:contain;object-position:center}
+  .qv-stage svg{width:auto;height:86%;max-width:90%}
+  .qv-thumbs{flex:0 0 56px;gap:6px}
+  .qv-thumb span{font-size:8px;padding:4px 1px}
+  .qv-body{
+    flex:1 1 auto;min-height:0;padding:14px 16px 0;gap:3px;
+    overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  }
+  .qv-body h3{font-size:16px;padding-right:42px;line-height:1.3}
   .qv-body .pricing{font-size:14px}
-  .qv-opts{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .qv-label{margin:12px 0 7px}
-  .qv-sizes button{height:40px;min-width:46px}
-  .qv-qty button{height:38px}
-  .qv-foot{flex:0 0 auto;background:var(--bg);border-top:1px solid var(--line);margin-top:8px;padding:8px 0 calc(14px + env(safe-area-inset-bottom))}
-  .qv-total{margin:6px 0 2px}
+  .qv-opts{flex:0 0 auto;min-height:0;overflow:visible;padding-bottom:8px}
+  .qv-label{margin:11px 0 7px}
+  .qv-colors button{width:28px;height:28px}
+  .qv-sizes{gap:7px}
+  .qv-sizes button{height:42px;min-width:46px}
+  .qv-qty button{height:40px}
+  .qv-foot{
+    position:sticky;bottom:0;flex:0 0 auto;background:var(--bg);
+    border-top:1px solid var(--line);margin:8px -16px 0;padding:9px 16px 12px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+  .qv-total{margin:3px 0 2px}
   .qv-btn{height:46px}
   .qv-btn.main{margin-top:8px}
   .qv-btn.alt{margin-top:6px}
+}
+
+/* Touch screens don't have hover: keep cards clean and make tap targets comfortable */
+@media(hover:none){
+  .product:hover .pic{transform:none}
+  .product:hover .pic.has-back .pic-front{transform:rotateY(0);opacity:1}
+  .product:hover .pic.has-back .pic-back{transform:rotateY(-180deg);opacity:0}
+  .product:hover .pic-hint{opacity:0}
+  .quick{transform:none;backdrop-filter:blur(8px)}
+  .quick .sizes button{min-width:34px;height:32px}
+  .quick .add{height:38px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -1603,7 +1632,7 @@ function renderQuick(){
       ${labels.map((label,i) => {
         const thumb = views[i]
           ? `<img src="${views[i]}" alt="${label}">`
-          : i === 0 ? visual(p, sel.color) : `<span>${label}</span>`;
+          : i === 0 ? visual(p, sel.color) : `<div class="thumb-placeholder">${label}</div>`;
         return `<button class="qv-thumb${i===qvView?" active":""}" data-qview="${i}" aria-label="${label}">${thumb}<span>${label}</span></button>`;
       }).join("")}
     </div>`;
