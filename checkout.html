@@ -11,193 +11,291 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#ffffff;
-  --bg2:#f4f4f6;
-  --card:#f1f1f3;
-  --line:#e4e4e8;
-  --text:#111111;
-  --muted:#6b6b73;
-  --hdr:rgba(255,255,255,.92);
+  --side:#f5f5f5;
+  --line:#d9d9d9;
+  --text:#1a1a1a;
+  --muted:#707070;
+  --blue:#1773e6;
+  --blue-bg:#f0f5ff;
   --sale:#d0021b;
-  --blue:#168bff;
-  --violet:#9b45ff;
+  --green:#1c9a4a;
 }
 :root[data-theme="dark"]{
   --bg:#0b0b0c;
-  --bg2:#141416;
-  --card:#18181b;
-  --line:#26262a;
+  --side:#141416;
+  --line:#2e2e33;
   --text:#f5f5f5;
   --muted:#9a9aa2;
-  --hdr:rgba(11,11,12,.9);
+  --blue:#4d9bff;
+  --blue-bg:#0f1b2e;
   --sale:#ff4d5e;
+  --green:#3ddc84;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",system-ui,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;font-size:14px;line-height:1.4}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 img{display:block;max-width:100%}
-
-/* TOP BAR */
-.bar{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 4%;background:var(--hdr);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.back{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.5px;justify-self:start}
-.back svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.back:hover{color:var(--violet)}
-.logo{font-size:28px;font-weight:900;letter-spacing:7px;margin-right:-7px;background:linear-gradient(90deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
-.secure{justify-self:end;font-size:10.5px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
-
-/* LAYOUT */
-.wrap{max-width:1080px;margin:0 auto;padding:34px 4% 70px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:44px;align-items:start}
-h1{font-size:clamp(24px,3.4vw,34px);font-weight:900;letter-spacing:2px;margin-bottom:6px}
-.lead{font-size:13px;color:var(--muted);margin-bottom:28px;letter-spacing:.3px}
-.title{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--muted);margin:0 0 12px}
-
-/* FORM */
-.row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-.f{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;min-width:0}
-.f label{font-size:10.5px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
-.f label i{font-style:normal;font-weight:500;letter-spacing:.5px}
-.f input,.f select,.f textarea{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--line);padding:14px 14px;font:inherit;font-size:16px;outline:none;border-radius:0;-webkit-appearance:none;appearance:none;transition:border-color .2s}
-.f textarea{resize:none;min-height:84px}
-.f select{padding-right:38px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%239a9aa2' stroke-width='1.6'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
-.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--violet)}
-.f.bad input,.f.bad select,.f.bad textarea{border-color:var(--sale)}
-.err{font-size:11px;color:var(--sale);letter-spacing:.3px}
-.err:empty{display:none}
-
-.m-total{display:none;justify-content:space-between;font-weight:800;font-size:14px;letter-spacing:1.5px;margin:6px 0 10px}
-.pay{font-size:11.5px;color:var(--muted);letter-spacing:.3px;margin:6px 0 14px;line-height:1.5}
-.submit{width:100%;height:54px;background:#25D366;color:#fff;border:1px solid #25D366;font-size:12px;font-weight:800;letter-spacing:2px;transition:.25s}
-.submit:hover{filter:brightness(1.08)}
-
-/* SUMMARY */
-.summary{position:sticky;top:90px;border:1px solid var(--line);background:var(--bg2);padding:20px 20px 8px}
-.line{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
-.thumb{position:relative;width:56px;height:70px;background:var(--card);overflow:hidden;display:grid;place-items:center;font-size:9px;font-weight:900;letter-spacing:1px}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.line h4{font-size:12px;letter-spacing:.8px;font-weight:700;margin-bottom:4px;line-height:1.3}
-.line small{display:block;color:var(--muted);font-size:11px;letter-spacing:.4px}
-.line b{font-size:12.5px;white-space:nowrap}
-.sum{display:flex;justify-content:space-between;font-size:12px;letter-spacing:1px;color:var(--muted);padding:11px 0;border-bottom:1px solid var(--line)}
-.sum.disc{color:#22b455;font-weight:700}
-.sum.total{color:var(--text);font-weight:800;font-size:14px;letter-spacing:1.5px;border-bottom:0;padding:14px 0 12px}
-.sum[hidden]{display:none}
-
-/* EMPTY + SUCCESS */
-.state{max-width:520px;margin:0 auto;text-align:center;padding:90px 4%}
-.state h2{font-size:26px;font-weight:900;letter-spacing:2px;margin:14px 0 10px}
-.state p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:26px}
-.state .ico{width:64px;height:64px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:linear-gradient(90deg,var(--blue),var(--violet))}
-.state .ico svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--text);color:var(--bg);border:1px solid var(--text);padding:16px 36px;font-size:12px;font-weight:800;letter-spacing:2px;transition:.3s}
-.btn:hover{background:var(--violet);border-color:var(--violet);color:#fff}
 [hidden]{display:none!important}
 
-@media(max-width:860px){
-  .wrap{grid-template-columns:1fr;gap:26px;padding-top:24px}
-  .summary{position:static;order:-1}
-  .m-total{display:flex}
-  .secure{display:none}
-  .bar{grid-template-columns:1fr auto 1fr}
+/* HEADER */
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+.top-in{display:grid;grid-template-columns:minmax(0,1.27fr) minmax(0,1fr);padding-left:24px}
+.top-l{width:100%;max-width:540px;margin-left:auto;padding:18px 40px 18px 0}
+.logo{display:inline-block;font-size:34px;font-weight:900;letter-spacing:6px;line-height:1;color:var(--text)}
+
+/* TWO COLUMNS */
+.cols{display:grid;grid-template-columns:minmax(0,1.27fr) minmax(0,1fr);min-height:calc(100vh - 71px)}
+.left{padding-left:24px}
+.left-in{width:100%;max-width:540px;margin-left:auto;padding:30px 40px 70px 0}
+.right{background:var(--side);border-left:1px solid var(--line)}
+.right-in{width:100%;max-width:470px;padding:30px 24px 70px 40px}
+.m-toggle{display:none}
+
+h2{font-size:20px;font-weight:600;margin:0 0 14px}
+.sec{margin-bottom:30px}
+.sub-h{font-size:13px;color:var(--muted);margin:-8px 0 14px}
+
+/* FIELDS (floating labels) */
+.fld{position:relative;margin-bottom:12px;min-width:0}
+.fld input,.fld select{width:100%;height:52px;padding:21px 14px 6px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;font:inherit;font-size:15px;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
+.fld select{padding-right:38px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23707070' stroke-width='1.6'/></svg>");background-repeat:no-repeat;background-position:right 16px center}
+.fld label{position:absolute;left:14px;top:16px;font-size:15px;color:var(--muted);pointer-events:none;transition:top .12s,font-size .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 44px)}
+.fld input:focus+label,.fld input:not(:placeholder-shown)+label,.fld select:valid+label{top:8px;font-size:11.5px}
+.fld input:focus,.fld select:focus{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.fld.bad input,.fld.bad select{border-color:var(--sale);box-shadow:0 0 0 1px var(--sale)}
+.err{display:block;font-size:12px;color:var(--sale);margin-top:5px}
+.err:empty{display:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:12px}
+
+.chk{display:flex;align-items:center;gap:10px;margin:2px 0 0;font-size:14px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--blue);flex-shrink:0}
+
+/* OPTION CARDS (shipping + payment) */
+.opt{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--bg)}
+.opt.sel{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);background:var(--blue-bg)}
+.opt.empty{background:var(--side);color:var(--muted)}
+.opt small{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.opt b{font-weight:600;white-space:nowrap}
+.opt .radio{width:18px;height:18px;border-radius:50%;border:5px solid var(--blue);background:var(--bg);flex-shrink:0}
+.opt .lbl{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+
+.submit{width:100%;height:58px;margin-top:6px;background:var(--blue);color:#fff;border:0;border-radius:8px;font-size:16px;font-weight:600;transition:filter .2s}
+.submit:hover{filter:brightness(1.1)}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+.ret{display:inline-block;margin-top:22px;color:var(--blue);font-size:14px}
+.ret:hover{text-decoration:underline}
+
+/* SUMMARY */
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:flex-start;margin-bottom:16px}
+.thumb-w{position:relative;width:64px;height:64px}
+.thumb{position:relative;width:64px;height:64px;border-radius:8px;border:1px solid rgba(128,128,128,.28);background:#f1f1f3;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb svg{position:absolute;left:50%;top:50%;width:112%;height:auto;transform:translate(-50%,-50%)}
+.qb{position:absolute;top:-8px;right:-8px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:rgba(40,40,40,.92);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center}
+.it-name{font-size:14px;line-height:1.3}
+.it-var{font-size:12px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.it-tag{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);text-transform:uppercase;margin-top:3px}
+.it-tag svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.it-price{text-align:right;font-size:14px}
+.it-price s{display:block;color:var(--muted);font-size:12px}
+.srow{display:flex;justify-content:space-between;gap:14px;font-size:14px;margin:9px 0}
+.srow .m{color:var(--muted);font-size:13px}
+.srow.disc{color:var(--green)}
+.trow{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 8px}
+.trow .tl{font-size:20px;font-weight:600}
+.trow .tr{font-size:12px;color:var(--muted)}
+.trow .tr b{font-size:22px;font-weight:600;color:var(--text);margin-left:6px}
+.save{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;text-transform:uppercase}
+.save svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* EMPTY + DONE */
+.state{max-width:520px;margin:0 auto;text-align:center;padding:90px 24px}
+.state h2{font-size:26px;margin:16px 0 10px}
+.state p{color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:26px}
+.state .ico{width:64px;height:64px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:var(--blue)}
+.state .ico svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;border-radius:8px;padding:16px 34px;font-size:15px;font-weight:600}
+
+/* MOBILE */
+@media(max-width:900px){
+  .top-in{grid-template-columns:1fr;padding:0 20px}
+  .top-l{padding:14px 0;max-width:none;margin:0}
+  .logo{font-size:28px}
+  .cols{grid-template-columns:1fr;min-height:0}
+  .left{padding:0 20px}
+  .left-in{max-width:none;margin:0;padding:22px 0 60px}
+  .right{order:-1;border-left:0;border-bottom:1px solid var(--line)}
+  .right-in{max-width:none;padding:0}
+  .m-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:16px 20px;background:none;border:0;color:var(--blue);font-size:14px}
+  .m-toggle .mt-l{display:flex;align-items:center;gap:8px}
+  .m-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .m-toggle .chev{transition:transform .2s}
+  .right.open .m-toggle .chev{transform:rotate(180deg)}
+  .m-toggle b{color:var(--text);font-size:17px;font-weight:600}
+  .right-body{display:none;padding:6px 20px 22px;border-top:1px solid var(--line)}
+  .right.open .right-body{display:block}
 }
-@media(max-width:460px){
-  .row{grid-template-columns:1fr}
-  .logo{font-size:24px;letter-spacing:6px}
+@media(max-width:520px){
+  .row3{grid-template-columns:1fr 1fr}
+  .row3 .fld:first-child{grid-column:1/-1}
 }
+@media(max-width:380px){.row2{grid-template-columns:1fr}}
 </style>
 </head>
 
 <body>
 
-<header class="bar">
-  <a class="back" href="index.html#shop" aria-label="Back to shop">
-    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>BACK TO SHOP
-  </a>
-  <a class="logo" href="index.html" aria-label="VOLT">VOLT.</a>
-  <span class="secure">CHECKOUT</span>
+<header class="top">
+  <div class="top-in">
+    <div class="top-l"><a class="logo" href="index.html" aria-label="VOLT">VOLT.</a></div>
+    <div></div>
+  </div>
 </header>
 
 <!-- EMPTY -->
 <main class="state" id="empty" hidden>
-  <h2>NOTHING TO CHECK OUT</h2>
-  <p>Your order is empty. Pick something you like and come back.</p>
-  <a class="btn" href="index.html#shop">GO TO SHOP</a>
+  <h2>Your order is empty</h2>
+  <p>Pick something you like and come back to complete your order.</p>
+  <a class="btn" href="index.html#shop">Continue shopping</a>
 </main>
 
-<!-- SUCCESS -->
+<!-- DONE -->
 <main class="state" id="done" hidden>
   <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-  <h2>ALMOST DONE</h2>
-  <p>Your order details are ready in WhatsApp. Press <b>Send</b> there to confirm your order, and we'll get back to you shortly.</p>
-  <a class="btn" href="index.html#shop">BACK TO SHOP</a>
+  <h2>Almost done</h2>
+  <p>Your order details are ready in WhatsApp. Press <b>Send</b> there to confirm your order and we'll get back to you shortly.</p>
+  <a class="btn" href="index.html#shop">Continue shopping</a>
 </main>
 
 <!-- CHECKOUT -->
-<main class="wrap" id="page" hidden>
-  <section>
-    <h1>CHECKOUT</h1>
-    <p class="lead">Fill in your details and we'll deliver to your door.</p>
+<div class="cols" id="page" hidden>
 
-    <form id="coForm" novalidate>
-      <p class="title">DELIVERY DETAILS</p>
+  <main class="left">
+    <div class="left-in">
+      <form id="coForm" novalidate>
 
-      <div class="f">
-        <label for="fName">FULL NAME</label>
-        <input id="fName" name="name" type="text" autocomplete="name" placeholder="e.g. Ahmed Mohamed">
-        <span class="err"></span>
-      </div>
-
-      <div class="row">
-        <div class="f">
-          <label for="fPhone">PHONE NUMBER</label>
-          <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX">
-          <span class="err"></span>
+        <div class="sec">
+          <h2>Contact</h2>
+          <div class="fld">
+            <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" ">
+            <label for="fPhone">Mobile phone number</label>
+            <span class="err"></span>
+          </div>
         </div>
-        <div class="f">
-          <label for="fPhone2">ANOTHER PHONE <i>(optional)</i></label>
-          <input id="fPhone2" name="phone2" type="tel" inputmode="tel" autocomplete="off" placeholder="01XXXXXXXXX">
-          <span class="err"></span>
+
+        <div class="sec">
+          <h2>Delivery</h2>
+
+          <div class="fld">
+            <select id="fCountry" name="country" required><option value="Egypt" selected>Egypt</option></select>
+            <label for="fCountry">Country/Region</label>
+          </div>
+
+          <div class="row2">
+            <div class="fld">
+              <input id="fFirst" name="first" type="text" autocomplete="given-name" placeholder=" ">
+              <label for="fFirst">First name</label>
+              <span class="err"></span>
+            </div>
+            <div class="fld">
+              <input id="fLast" name="last" type="text" autocomplete="family-name" placeholder=" ">
+              <label for="fLast">Last name</label>
+              <span class="err"></span>
+            </div>
+          </div>
+
+          <div class="fld">
+            <input id="fAddress" name="address" type="text" autocomplete="address-line1" placeholder=" ">
+            <label for="fAddress">Address</label>
+            <span class="err"></span>
+          </div>
+
+          <div class="fld">
+            <input id="fApt" name="apt" type="text" autocomplete="address-line2" placeholder=" ">
+            <label for="fApt">Apartment, suite, etc. (optional)</label>
+          </div>
+
+          <div class="row3">
+            <div class="fld">
+              <input id="fCity" name="city" type="text" autocomplete="address-level2" placeholder=" ">
+              <label for="fCity">City</label>
+              <span class="err"></span>
+            </div>
+            <div class="fld">
+              <select id="fGov" name="gov" autocomplete="address-level1" required></select>
+              <label for="fGov">Governorate</label>
+              <span class="err"></span>
+            </div>
+            <div class="fld">
+              <input id="fZip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" placeholder=" ">
+              <label for="fZip">Postal code (optional)</label>
+            </div>
+          </div>
+
+          <div class="fld">
+            <input id="fPhone2" name="phone2" type="tel" inputmode="tel" autocomplete="off" placeholder=" ">
+            <label for="fPhone2">Another phone (optional)</label>
+            <span class="err"></span>
+          </div>
+
+          <label class="chk"><input type="checkbox" name="save" id="fSave"> Save this information for next time</label>
+        </div>
+
+        <div class="sec">
+          <h2>Shipping method</h2>
+          <div id="shipBox"></div>
+        </div>
+
+        <div class="sec">
+          <h2>Payment</h2>
+          <p class="sub-h">Pay when your order arrives.</p>
+          <div class="opt sel"><span class="lbl"><span class="radio"></span>Cash on Delivery (COD)</span></div>
+        </div>
+
+        <button type="submit" class="submit">Complete order</button>
+        <p class="note">Your order will be sent to us on WhatsApp to confirm.</p>
+        <a class="ret" href="index.html#shop">‹ Return to shop</a>
+      </form>
+    </div>
+  </main>
+
+  <aside class="right" id="right" aria-label="Order summary">
+    <button type="button" class="m-toggle" id="mToggle" aria-expanded="false">
+      <span class="mt-l">
+        <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span id="mtText">Show order summary</span>
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+      <b class="js-total-m">E£0.00</b>
+    </button>
+
+    <div class="right-body">
+      <div class="right-in" id="rightIn">
+        <div id="lines"></div>
+        <div class="srow"><span>Subtotal</span><span id="sSub">E£0.00</span></div>
+        <div class="srow disc" id="sDiscRow" hidden><span id="sDiscLabel">Discount</span><span id="sDisc">-E£0.00</span></div>
+        <div class="srow"><span>Shipping</span><span id="sShip" class="m">Select governorate</span></div>
+        <div class="trow"><span class="tl">Total</span><span class="tr">EGP <b class="js-total">E£0.00</b></span></div>
+        <div class="save" id="saveRow" hidden>
+          <svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
+          <span>Total savings <span id="saveAmt">E£0.00</span></span>
         </div>
       </div>
-
-      <div class="row">
-        <div class="f">
-          <label for="fGov">GOVERNORATE</label>
-          <select id="fGov" name="gov" autocomplete="address-level1"></select>
-          <span class="err"></span>
-        </div>
-        <div class="f">
-          <label for="fCity">CITY / AREA</label>
-          <input id="fCity" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Nasr City">
-          <span class="err"></span>
-        </div>
-      </div>
-
-      <div class="f">
-        <label for="fAddress">FULL ADDRESS</label>
-        <textarea id="fAddress" name="address" autocomplete="street-address" placeholder="Street, building no., floor, apartment, landmark"></textarea>
-        <span class="err"></span>
-      </div>
-
-      <div class="m-total"><span>TOTAL</span><span class="js-total">0 EGP</span></div>
-      <p class="pay">Payment: cash on delivery. Your order is sent to us on WhatsApp for confirmation.</p>
-      <button type="submit" class="submit">CONFIRM ORDER ON WHATSAPP</button>
-    </form>
-  </section>
-
-  <aside class="summary" aria-label="Order summary">
-    <p class="title">YOUR ORDER</p>
-    <div id="lines"></div>
-    <div class="sum"><span>SUBTOTAL</span><span id="sSub">0 EGP</span></div>
-    <div class="sum disc" id="sDiscRow" hidden><span id="sDiscLabel">DISCOUNT</span><span id="sDisc">-0 EGP</span></div>
-    <div class="sum" id="sShipRow" hidden><span>SHIPPING</span><span id="sShip">0 EGP</span></div>
-    <div class="sum total"><span>TOTAL</span><span class="js-total">0 EGP</span></div>
+    </div>
   </aside>
-</main>
+
+</div>
 
 <script>
 const $ = s => document.querySelector(s);
+/* للعرض في الصفحة */
+const money = n => "E£" + n.toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+/* لرسالة الواتساب */
 const fmt = n => n.toLocaleString("en-US") + " EGP";
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const TAG = `<svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>`;
 
 let order = null;
 try { order = JSON.parse(localStorage.getItem("volt-checkout") || "null"); } catch(e){}
@@ -211,6 +309,14 @@ if(!order || !Array.isArray(order.lines) || !order.lines.length){
 function start(){
   $("#page").hidden = false;
 
+  /* تعريفات رسم القطع (للقطع اللي ملهاش صورة) */
+  if(order.defs){
+    const d = document.createElement("div");
+    d.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+    d.innerHTML = `<svg width="0" height="0" aria-hidden="true" focusable="false">${order.defs}</svg>`;
+    document.body.appendChild(d);
+  }
+
   const SHIPPING = order.shipping || {};
   const GOVS = Object.keys(SHIPPING);
   const FREE_FROM = +order.freeFrom || 0;
@@ -219,45 +325,78 @@ function start(){
   const pct  = order.promo ? +order.promo.pct : 0;
   const disc = Math.round(sub * pct / 100);
   const itemsTotal = sub - disc;
+  const saleSavings = order.lines.reduce((a,i) => a + (i.old > i.price ? (i.old - i.price) * i.qty : 0), 0);
+  const totalSavings = saleSavings + disc;
 
   /* الشحن بيتحسب بس لما العميل يختار المحافظة */
   const shipFor = gov => (!gov || !(gov in SHIPPING)) ? null : ((FREE_FROM > 0 && itemsTotal >= FREE_FROM) ? 0 : SHIPPING[gov]);
 
-  /* ملخص الأوردر */
-  $("#lines").innerHTML = order.lines.map(i => `
-    <div class="line">
-      <div class="thumb" style="background:${esc(i.hex || "#18181b")};color:#888">${i.img ? `<img src="${esc(i.img)}" alt="${esc(i.name)}">` : ""}</div>
-      <div><h4>${esc(i.name)}</h4><small>${esc(i.color)} · SIZE ${esc(i.size)} · x${i.qty}</small></div>
-      <b>${fmt(i.price * i.qty)}</b>
-    </div>`).join("");
-  $("#sSub").textContent = fmt(sub);
+  /* ملخص الأوردر (صور القطع + الكمية) */
+  $("#lines").innerHTML = order.lines.map(i => {
+    const thumb = i.img ? `<img src="${esc(i.img)}" alt="${esc(i.name)}">` : (i.svg || "");
+    const onSale = i.old > i.price;
+    const off = onSale ? Math.round((i.old - i.price) / i.old * 100) : 0;
+    return `
+    <div class="item">
+      <div class="thumb-w">
+        <div class="thumb" style="--c:${esc(i.hex)};--ink:${esc(i.ink || "#fff")}">${thumb}</div>
+        <span class="qb">${i.qty}</span>
+      </div>
+      <div>
+        <p class="it-name">${esc(i.name)}</p>
+        <p class="it-var">${esc(i.color)} / ${esc(i.size)}</p>
+        ${onSale ? `<p class="it-tag">${TAG}<span>Sale ${off}% (-${money((i.old - i.price) * i.qty)})</span></p>` : ""}
+      </div>
+      <div class="it-price">${onSale ? `<s>${money(i.old * i.qty)}</s>` : ""}<span>${money(i.price * i.qty)}</span></div>
+    </div>`;
+  }).join("");
+  $("#sSub").textContent = money(sub);
   if(order.promo){
     $("#sDiscRow").hidden = false;
-    $("#sDiscLabel").textContent = `DISCOUNT ${order.promo.code} (${pct}%)`;
-    $("#sDisc").textContent = "-" + fmt(disc);
+    $("#sDiscLabel").textContent = `Discount ${order.promo.code} (${pct}%)`;
+    $("#sDisc").textContent = "-" + money(disc);
+  }
+  if(totalSavings > 0){
+    $("#saveRow").hidden = false;
+    $("#saveAmt").textContent = money(totalSavings);
   }
 
-  const form = $("#coForm"), f = form.elements;
-  f.gov.innerHTML = `<option value="">Select governorate</option>` + GOVS.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join("");
+  const form = $("#coForm");
+  const g = n => form.elements.namedItem(n);
+  g("gov").innerHTML = `<option value="" hidden></option>` + GOVS.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join("");
 
+  /* الشحن: بيظهر ويتضاف للإجمالي بعد اختيار المحافظة */
   function updateTotals(){
-    const ship = shipFor(f.gov.value);
-    $("#sShipRow").hidden = ship === null;
-    if(ship !== null) $("#sShip").textContent = ship === 0 ? "FREE" : fmt(ship);
+    const gov = g("gov").value, ship = shipFor(gov);
+    const sh = $("#sShip");
+    if(ship === null){
+      sh.textContent = "Select governorate";
+      sh.className = "m";
+      $("#shipBox").innerHTML = `<div class="opt empty">Select your governorate to see shipping rates.</div>`;
+    } else {
+      sh.textContent = ship === 0 ? "FREE" : money(ship);
+      sh.className = "";
+      $("#shipBox").innerHTML = `<div class="opt sel"><div><span>Delivery to ${esc(gov)}</span><small>Delivered to your door</small></div><b>${ship === 0 ? "FREE" : money(ship)}</b></div>`;
+    }
     const total = itemsTotal + (ship || 0);
-    document.querySelectorAll(".js-total").forEach(el => el.textContent = fmt(total));
+    document.querySelectorAll(".js-total").forEach(el => el.textContent = money(total));
+    $(".js-total-m").textContent = money(total);
   }
 
   /* بيانات العميل المحفوظة من أوردر قبل كده */
   let c = {};
   try { c = JSON.parse(localStorage.getItem("volt-customer") || "{}"); } catch(e){}
-  f.name.value    = c.name || "";
-  f.phone.value   = c.phone || "";
-  f.phone2.value  = c.phone2 || "";
-  f.gov.value     = GOVS.includes(c.gov) ? c.gov : "";
-  f.city.value    = c.city || "";
-  f.address.value = c.address || "";
+  ["phone","first","last","address","apt","city","zip","phone2"].forEach(k => { g(k).value = c[k] || ""; });
+  g("gov").value = GOVS.includes(c.gov) ? c.gov : "";
+  g("save").checked = !!c.phone;
   updateTotals();
+
+  /* ملخص الأوردر على الموبايل */
+  $("#mToggle").addEventListener("click", () => {
+    const open = $("#right").classList.toggle("open");
+    $("#mToggle").setAttribute("aria-expanded", open);
+    $("#mtText").textContent = open ? "Hide order summary" : "Show order summary";
+  });
 
   /* التحقق */
   const normPhone = s => String(s || "")
@@ -267,35 +406,41 @@ function start(){
     .replace(/^1(?=[0125]\d{8}$)/, "0");
   const okPhone = s => /^01[0125]\d{8}$/.test(s);
   function setErr(el, msg){
-    const w = el.closest(".f");
+    const w = el.closest(".fld");
+    if(!w) return;
     w.classList.toggle("bad", !!msg);
-    w.querySelector(".err").textContent = msg || "";
+    const e = w.querySelector(".err");
+    if(e) e.textContent = msg || "";
   }
-  form.addEventListener("input", e => { if(e.target.closest(".f")) setErr(e.target, ""); });
+  form.addEventListener("input", e => setErr(e.target, ""));
   form.addEventListener("change", e => {
-    if(e.target.closest(".f")) setErr(e.target, "");
-    if(e.target === f.gov) updateTotals();
+    setErr(e.target, "");
+    if(e.target === g("gov")) updateTotals();
   });
 
   form.addEventListener("submit", e => {
     e.preventDefault();
     const v = {
-      name: f.name.value.trim().replace(/\s+/g, " "),
-      phone: normPhone(f.phone.value),
-      phone2: normPhone(f.phone2.value),
-      gov: f.gov.value,
-      city: f.city.value.trim(),
-      address: f.address.value.trim().replace(/\s+/g, " ")
+      phone:   normPhone(g("phone").value),
+      first:   g("first").value.trim().replace(/\s+/g, " "),
+      last:    g("last").value.trim().replace(/\s+/g, " "),
+      address: g("address").value.trim().replace(/\s+/g, " "),
+      apt:     g("apt").value.trim().replace(/\s+/g, " "),
+      city:    g("city").value.trim(),
+      gov:     g("gov").value,
+      zip:     g("zip").value.trim(),
+      phone2:  normPhone(g("phone2").value)
     };
 
     let first = null;
-    const bad = (el, msg) => { setErr(el, msg); if(!first) first = el; };
-    if(v.name.length < 3)              bad(f.name, "Please enter your full name.");
-    if(!okPhone(v.phone))              bad(f.phone, "Enter a valid Egyptian mobile (01XXXXXXXXX).");
-    if(v.phone2 && !okPhone(v.phone2)) bad(f.phone2, "Enter a valid mobile or leave it empty.");
-    if(!v.gov)                         bad(f.gov, "Select your governorate.");
-    if(v.city.length < 2)              bad(f.city, "Enter your city or area.");
-    if(v.address.length < 8)           bad(f.address, "Enter your full address (street, building, floor, apartment).");
+    const bad = (k, msg) => { const el = g(k); setErr(el, msg); if(!first) first = el; };
+    if(!okPhone(v.phone))              bad("phone",   "Enter a valid Egyptian mobile number (01XXXXXXXXX).");
+    if(v.first.length < 2)             bad("first",   "Enter your first name.");
+    if(v.last.length < 2)              bad("last",    "Enter your last name.");
+    if(v.address.length < 6)           bad("address", "Enter your street address.");
+    if(v.city.length < 2)              bad("city",    "Enter your city.");
+    if(!v.gov)                         bad("gov",     "Select a governorate.");
+    if(v.phone2 && !okPhone(v.phone2)) bad("phone2",  "Enter a valid mobile or leave it empty.");
     if(first){ first.focus(); return; }
 
     const ship = shipFor(v.gov);
@@ -304,12 +449,17 @@ function start(){
     if(order.promo) msg += `\nDiscount code: ${order.promo.code} (${pct}% = -${fmt(disc)})`;
     msg += `\nShipping (${v.gov}): ${ship === 0 ? "FREE" : fmt(ship)}`;
     msg += `\n*Total: ${fmt(itemsTotal + ship)}*`;
-    msg += `\n\n*CUSTOMER*\nName: ${v.name}\nPhone: ${v.phone}`;
+    msg += `\n\n*CUSTOMER*\nName: ${v.first} ${v.last}\nPhone: ${v.phone}`;
     if(v.phone2) msg += `\nAnother phone: ${v.phone2}`;
-    msg += `\nGovernorate: ${v.gov}\nCity / Area: ${v.city}\nAddress: ${v.address}`;
+    msg += `\nGovernorate: ${v.gov}\nCity: ${v.city}\nAddress: ${v.address}${v.apt ? ", " + v.apt : ""}`;
+    if(v.zip) msg += `\nPostal code: ${v.zip}`;
     msg += `\n\nPayment: Cash on delivery`;
 
-    try { localStorage.setItem("volt-customer", JSON.stringify(v)); } catch(err){}
+    try {
+      if(g("save").checked) localStorage.setItem("volt-customer", JSON.stringify(v));
+      else localStorage.removeItem("volt-customer");
+    } catch(err){}
+
     const url = `https://wa.me/${order.whatsapp}?text=${encodeURIComponent(msg)}`;
 
     /* نفضّي السلة لو الأوردر جاي منها */
