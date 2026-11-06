@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>VOLT — New Collection</title>
 <meta name="description" content="VOLT. Everyday essentials. Different attitude.">
 <script>try{if(localStorage.getItem("volt-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
@@ -329,6 +329,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 .qv-btn.alt{background:transparent;color:var(--text);margin-top:8px}
 .qv-btn.alt:hover{background:var(--violet);border-color:var(--violet);color:#fff}
 .product .media,.product .info h3{cursor:pointer}
+.qv-opts{overscroll-behavior:contain}
 
 /* RESPONSIVE */
 @media(max-width:1280px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -379,10 +380,31 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
   .cta{padding:44px 6%}
 }
 @media(max-width:700px){
-  .qv{grid-template-columns:1fr;top:auto;bottom:0;width:100vw;max-height:92vh;transform:translate(-50%,100%)}
-  .qv.open{transform:translate(-50%,0)}
-  .qv-img{aspect-ratio:1/1;max-height:38vh}
-  .qv-body{padding:22px 20px 26px}
+  /* شيت بيطلع من تحت: الصورة ثابتة فوق، الاختيارات بتتسكرول، والأزرار ثابتة تحت */
+  .qv{
+    display:flex;flex-direction:column;overflow:hidden;
+    left:0;right:0;top:auto;bottom:0;width:100%;
+    max-height:90vh;max-height:90dvh;
+    border-width:1px 0 0;border-radius:18px 18px 0 0;
+    transform:translateY(100%);
+  }
+  .qv.open{transform:none}
+  .qv-close{top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff}
+  .qv-img{flex:0 0 auto;aspect-ratio:auto;height:30vh;height:30dvh;min-height:170px}
+  .qv-img img{object-position:center top}
+  .qv-img svg{width:auto;height:92%}
+  .qv-body{flex:1 1 auto;min-height:0;padding:16px 18px 0;gap:2px;overflow:hidden}
+  .qv-body h3{font-size:16px;padding-right:0}
+  .qv-body .pricing{font-size:14px}
+  .qv-opts{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .qv-label{margin:12px 0 7px}
+  .qv-sizes button{height:40px;min-width:46px}
+  .qv-qty button{height:38px}
+  .qv-foot{flex:0 0 auto;background:var(--bg);border-top:1px solid var(--line);margin-top:8px;padding:8px 0 calc(14px + env(safe-area-inset-bottom))}
+  .qv-total{margin:6px 0 2px}
+  .qv-btn{height:46px}
+  .qv-btn.main{margin-top:8px}
+  .qv-btn.alt{margin-top:6px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -1521,21 +1543,25 @@ function renderQuick(){
   $("#qvBody").innerHTML = `
     <h3>${p.name}</h3>
     ${pricing}
-    <div class="qv-label">COLOR: <b>${sel.color}</b></div>
-    <div class="qv-colors">
-      ${p.colors.map(c => `<button class="${c===sel.color?"sel":""}" data-qcolor="${c}" style="background:${COLORS[c]}" title="${c}" aria-label="${c}"></button>`).join("")}
+    <div class="qv-opts">
+      <div class="qv-label">COLOR: <b>${sel.color}</b></div>
+      <div class="qv-colors">
+        ${p.colors.map(c => `<button class="${c===sel.color?"sel":""}" data-qcolor="${c}" style="background:${COLORS[c]}" title="${c}" aria-label="${c}"></button>`).join("")}
+      </div>
+      <div class="qv-label">SIZE: <b>${sel.size}</b></div>
+      <div class="qv-sizes">
+        ${SIZES[p.category].map(s => `<button class="${s===sel.size?"sel":""}" data-qsize="${s}">${s}</button>`).join("")}
+      </div>
+      <div class="qv-label">QUANTITY</div>
+      <div class="qv-qty">
+        <button data-qminus aria-label="Decrease">−</button><span>${qvQty}</span><button data-qplus aria-label="Increase">+</button>
+      </div>
     </div>
-    <div class="qv-label">SIZE: <b>${sel.size}</b></div>
-    <div class="qv-sizes">
-      ${SIZES[p.category].map(s => `<button class="${s===sel.size?"sel":""}" data-qsize="${s}">${s}</button>`).join("")}
-    </div>
-    <div class="qv-label">QUANTITY</div>
-    <div class="qv-qty">
-      <button data-qminus aria-label="Decrease">−</button><span>${qvQty}</span><button data-qplus aria-label="Increase">+</button>
-    </div>
-    <div class="qv-total"><span>TOTAL</span><span>${fmt(p.price*qvQty)}</span></div>
-    <button class="qv-btn main" data-qorder>ORDER VIA WHATSAPP</button>
-    <button class="qv-btn alt" data-qadd>ADD TO CART</button>`;
+    <div class="qv-foot">
+      <div class="qv-total"><span>TOTAL</span><span>${fmt(p.price*qvQty)}</span></div>
+      <button class="qv-btn main" data-qorder>ORDER VIA WHATSAPP</button>
+      <button class="qv-btn alt" data-qadd>ADD TO CART</button>
+    </div>`;
 }
 
 qvEl.addEventListener("click", e => {
