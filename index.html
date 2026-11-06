@@ -98,14 +98,14 @@ body.lock{overflow:hidden}
   display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff;
   background:#0b0b0c;overflow:hidden;
 }
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:25% center;z-index:0;opacity:.98}
 .hero::before{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.25) 50%,rgba(0,0,0,0) 68%),
-    linear-gradient(0deg,rgba(11,11,12,.9) 0%,rgba(11,11,12,0) 38%);
+    linear-gradient(90deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.28) 34%,rgba(0,0,0,.86) 58%,#050506 100%),
+    linear-gradient(0deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,0) 42%);
 }
-.hero-content{position:relative;z-index:2;padding:0 4% 90px;max-width:720px;animation:rise 1s ease both}
+.hero-content{position:relative;z-index:2;padding:0 5% 90px 2%;max-width:58%;margin-left:auto;text-align:right;animation:rise 1s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:4px;color:#d8d8dc}
 .eyebrow i{width:8px;height:8px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 0 0 rgba(255,59,59,.7);animation:pulse 1.8s infinite}
@@ -116,7 +116,7 @@ body.lock{overflow:hidden}
 .btn:hover{background:transparent;color:#fff}
 .btn.ghost{background:transparent;color:#fff;margin-left:10px}
 .btn.ghost:hover{background:#fff;color:#111}
-.rating{display:flex;align-items:center;gap:10px;margin-top:34px;font-size:12px;color:#d0d0d5}
+.rating{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:34px;font-size:12px;color:#d0d0d5}
 .stars{color:#fff;letter-spacing:3px}
 .scroll-hint{z-index:2;position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:34px;height:34px;display:grid;place-items:center;animation:bounce 2s infinite}
 .scroll-hint svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
@@ -393,7 +393,7 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
     background:#0b0b0c;
   }
   .hero::before{display:none}
-  .hero-video{position:relative;inset:auto;width:100%;height:auto;object-fit:contain;display:block;flex-shrink:0}
+  .hero-photo{object-position:30% center}
   .hero::after{
     content:"";position:absolute;left:0;right:0;top:0;height:110px;pointer-events:none;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 100%);
@@ -540,12 +540,10 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto">
-    <source src="https://www.image2url.com/r2/default/videos/1793551136184-6271e667-3511-4df8-b44f-8bbb3297a37d.mp4" type="video/mp4">
-  </video>
+  <img class="hero-photo" src="volt-assets/volt-hero.jpg" alt="VOLT streetwear campaign model wearing branded black oversized tee">
   <div class="hero-content">
     <div class="eyebrow"><i></i>LIVE NOW / NEW COLLECTION</div>
-    <h1>OWN YOUR<br>STYLE.</h1>
+    <h1>OWN YOUR<br><span style="background:linear-gradient(90deg,#168bff,#9b45ff);-webkit-background-clip:text;background-clip:text;color:transparent">STYLE.</span></h1>
     <p class="sub">EVERYDAY ESSENTIALS. DIFFERENT ATTITUDE.</p>
     <a href="#shop" class="btn">SHOP NOW</a><a href="#offer" class="btn ghost">BUY 1 GET 2</a>
     <div class="rating"><span class="stars">★★★★★</span><span>Loved by our customers</span></div>
@@ -559,23 +557,23 @@ footer p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:14px}
 <section class="features">
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-    <div><b>FREE SHIPPING</b><span>On orders over 2000 EGP</span></div>
+    <div><b>FREE SHIPPING</b><span>OVER 999 EGP</span></div>
   </div>
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5"/></svg>
-    <div><b>EASY EXCHANGE</b><span>Wrong size? We got you</span></div>
+    <div><b>EASY EXCHANGE</b><span>WITHIN 14 DAYS</span></div>
   </div>
   <div class="feature">
     <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>
-    <div><b>PREMIUM QUALITY</b><span>Heavy fabric. Built to last</span></div>
+    <div><b>24/7 SUPPORT</b><span>WE'RE HERE TO HELP</span></div>
   </div>
 </section>
 
 <!-- SHOP -->
 <section id="shop">
   <div class="section-head">
-    <small>SPRING / SUMMER '26</small>
-    <h2>NEW COLLECTION</h2>
+    <small>NEW DROP</small>
+    <h2>LATEST COLLECTION</h2>
   </div>
 
   <div class="toolbar">
@@ -750,15 +748,15 @@ const COLORS = {
   imgs    = صورة لكل لون (لو موجودة بتظهر بدل الرسم)
 */
 const items = [
- {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"],
+ {id:1,name:"OVERSIZED TEE",     price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"over", deco:"bolt",   colors:["WHITE","PINK","BLACK"], cardImage:"volt-assets/volt-product-1.jpg",
   imgs:{
     WHITE:"https://cdn.phototourl.com/member/2026-10-30-078b9efc-abc8-43db-9fd8-8624ded0d532.jpg",
     PINK:"https://cdn.phototourl.com/member/2026-10-30-0c76478a-0123-43be-ae44-98134fcddfa3.jpg",
     BLACK:"https://cdn.phototourl.com/member/2026-10-30-6b96d8d7-9af2-45d7-95a7-e8519424fc25.jpg"
   }},
- {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"]},
- {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"]},
- {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"]},
+ {id:2,name:"ESSENTIAL TEE",     price:399, old:550, category:"T-SHIRTS",   tag:"BESTSELLER", type:"tee",  deco:"logo",   colors:["WHITE","BLACK","NAVY","BEIGE"], cardImage:"volt-assets/volt-product-2.jpg"},
+ {id:3,name:"STREETWEAR SET",    price:1299,         category:"SETS",       tag:"NEW",        type:"set",  deco:"logo",   colors:["BLACK","GRAY","NAVY","OLIVE"], cardImage:"volt-assets/volt-product-4.jpg"},
+ {id:4,name:"URBAN DAILY TEE",   price:449, old:600, category:"T-SHIRTS",   tag:"",           type:"tee",  deco:"stripe", colors:["GRAY","BLACK","BEIGE","NAVY"], cardImage:"volt-assets/volt-product-3.jpg"},
  {id:5,name:"MINIMAL CAP",       price:299,          category:"ACCESSORIES",tag:"",           type:"cap",  deco:"none",   colors:["BLACK","WHITE","NAVY","BEIGE"]},
  {id:6,name:"CLASSIC COTTON TEE",price:499, old:650, category:"T-SHIRTS",   tag:"NEW",        type:"tee",  deco:"pocket", colors:["OLIVE","WHITE","BLACK","GRAY"]},
  {id:7,name:"CASUAL TWO PIECE",  price:1199,         category:"SETS",       tag:"",           type:"set",  deco:"none",   colors:["BEIGE","BLACK","OLIVE"]},
@@ -851,7 +849,7 @@ function visual(p, color){
 function getViews(p, color){
   const custom = p.views && p.views[color] ? p.views[color] : [];
   return [
-    custom[0] || (p.imgs && p.imgs[color]) || null,
+    custom[0] || (p.imgs && p.imgs[color]) || p.cardImage || null,
     custom[1] || null,
     custom[2] || null
   ];
@@ -865,7 +863,7 @@ function cardVisual(p, color){
 }
 /* تحميل مسبق لكل صور المنتجات والزوايا */
 items.forEach(p => {
-  const urls = [...Object.values(p.imgs || {}), ...Object.values(p.views || {}).flat()];
+  const urls = [p.cardImage, ...Object.values(p.imgs || {}), ...Object.values(p.views || {}).flat()];
   urls.filter(Boolean).forEach(u => { const im = new Image(); im.src = u; });
 });
 
@@ -1731,3 +1729,4 @@ updateCart();
 
 </body>
 </html>
+@media(max-width:700px){.hero-content{max-width:100%;margin-left:0;text-align:left;padding:0 5% 54px}.rating{justify-content:flex-start}}
